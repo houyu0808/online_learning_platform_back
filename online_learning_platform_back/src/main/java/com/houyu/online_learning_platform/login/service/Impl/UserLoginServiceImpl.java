@@ -25,7 +25,7 @@ public class UserLoginServiceImpl implements UserLoginService{
     private HttpServletResponse httpServletResponse;
 
     @Override
-    public String loginVerification(String username, String password){
+    public  String loginVerification(String username, String password){
         User user =  userLoginRepository.findByUsername(username);
         Date createTime = Calendar.getInstance().getTime();
         if(user != null){
