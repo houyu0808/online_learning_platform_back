@@ -1,0 +1,36 @@
+server:
+  port: 8090
+spring:
+  datasource:
+    username: houyu1124
+    password: houyu07181
+    url: jdbc:mysql://localhost:3307/learning_platform?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8&useSSL=false
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  flyway:
+    # 是否启用flyway
+    enabled: false
+    # 编码格式，默认UTF-8
+    encoding: UTF-8
+    # 迁移sql脚本文件存放路径，默认db/migration
+    locations: classpath:database/flyway
+    # 迁移sql脚本文件名称的前缀，默认V
+    sql-migration-prefix: V
+    # 迁移sql脚本文件名称的分隔符，默认2个下划线__
+    sql-migration-separator: __
+    # 迁移sql脚本文件名称的后缀
+    sql-migration-suffixes: .sql
+    # 迁移时是否进行校验，默认true
+    validate-on-migrate: true
+    # 当迁移发现数据库非空且存在没有元数据的表时，自动执行基准迁移，新建schema_version表
+    baseline-on-migrate: true
+app:
+  jwtExpirationAt: 86400000
+  secret: JKKLJOoasdlfj
+  auther: houyu
+feign:
+  # Feign org.springframework.data.domain.Page编码和解码
+  # Feign org.springframework.data.domain.Sort编码解码
+  autoconfiguration:
+    jackson:
+      # 如果为true，则将提供PageJacksonModule、SortJacksonModule用jackson对Page进行编码和解码操作，默认：false
+      enabled: true

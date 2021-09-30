@@ -14,7 +14,7 @@ public class webConfig implements WebMvcConfigurer {
         };
         //不需要拦截的路径
         String [] excludePathPaterns={
-            "/login/studentLogin"
+            "/user/**"
         };
         //注册一个登录拦截器
         registry.addInterceptor(new tokenUtils())
