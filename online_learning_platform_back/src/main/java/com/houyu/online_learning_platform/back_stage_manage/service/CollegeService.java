@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 @Service
 public interface CollegeService {
     //获取学院列表
-    Page<College> getCollegeList(Pageable pageable);
+    Page<College> getCollegeList(String collegeName,Pageable pageable);
     //新建学院
-    void saveCollege(CollegeVO collegeVO);
+    String saveCollege(CollegeVO collegeVO);
+    //删除学院
+    String deleteCollege(Integer id);
 }

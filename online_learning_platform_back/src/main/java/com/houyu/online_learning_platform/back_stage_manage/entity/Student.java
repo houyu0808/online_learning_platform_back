@@ -3,9 +3,7 @@ package com.houyu.online_learning_platform.back_stage_manage.entity;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Getter
 @Setter
@@ -13,6 +11,9 @@ import javax.persistence.Table;
 @Entity
 public class Student {
     @Id
+    @GeneratedValue(
+            strategy = GenerationType.IDENTITY
+    )
     private Integer id;
     //身份
     private String identify;
