@@ -43,19 +43,18 @@ public class CollegeServiceImpl implements CollegeService {
             collegeRepository.save(college);
             return "更新成功!";
         }else{
-            List<College> college1 = collegeRepository.findByCollegeName(collegeVO.getCollegeName());
-            List<College> college2 =collegeRepository.findByCollegeCode(collegeVO.getCollegeCode());
-            if(college1.isEmpty() && college2.isEmpty()){
+            College college1 = collegeRepository.findByCollegeName(collegeVO.getCollegeName());
+            College college2 =collegeRepository.findByCollegeCode(collegeVO.getCollegeCode());
+            if(college1 == null && college2 == null){
                 College collegeInfo = new College();
                 collegeInfo.setCollegeName(collegeVO.getCollegeName());
                 collegeInfo.setCollegeCode(collegeVO.getCollegeCode());
                 collegeRepository.save(collegeInfo);
                 return "创建成功!";
             }else{
-                return "该学院已存在";
+                return "该学院名称/编码已存在";
             }
         }
-
     }
     //删除学院
     @Override

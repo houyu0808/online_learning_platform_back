@@ -1,9 +1,10 @@
 package com.houyu.online_learning_platform.back_stage_manage.service.impl;
 
+import com.houyu.online_learning_platform.back_stage_manage.dao.CollegeRepository;
 import com.houyu.online_learning_platform.back_stage_manage.dao.MajorRepository;
 import com.houyu.online_learning_platform.back_stage_manage.entity.College;
 import com.houyu.online_learning_platform.back_stage_manage.entity.Major;
-import com.houyu.online_learning_platform.back_stage_manage.service.majorService;
+import com.houyu.online_learning_platform.back_stage_manage.service.MajorService;
 import com.houyu.online_learning_platform.back_stage_manage.vo.MajorVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +18,12 @@ import java.util.Optional;
 
 @Service
 @Transactional
-public class majorServiceImpl implements majorService {
+public class MajorServiceImpl implements MajorService {
     @Autowired
     private MajorRepository majorRepository;
 
+    @Autowired
+    private CollegeRepository collegeRepository;
     //获取专业列表
     @Override
     public Page<Major> getMajorList(String majorName, Pageable pageable){
@@ -42,17 +45,33 @@ public class majorServiceImpl implements majorService {
             majorRepository.save(major);
             return "更新成功!";
         }else{
-            List<Major> major1 = majorRepository.findByMajorName(majorVO.getMajorName());
-            List<Major> major2 =majorRepository.findByMajorCode(majorVO.getMajorCode());
-            if(major1.isEmpty() && major2.isEmpty()){
+            Major major1 = majorRepository.findByMajorName(majorVO.getMajorName());
+            Major major2 =majorRepository.findByMajorCode(majorVO.getMajorCode());
+            College college = collegeRepository.findByCollegeCode(majorVO.getAffiliatedCollegeCode());
+            if(major1 == null && major2 == null){
                 Major major = new Major();
                 major.setMajorName(majorVO.getMajorName());
                 major.setMajorCode(majorVO.getMajorCode());
+                major.setAffiliatedCollegeCode(majorVO.getAffiliatedCollegeCode());
+                major.setAffiliatedCollegeName(college.getCollegeName());
                 majorRepository.save(major);
                 return "创建成功!";
             }else{
-                return "该专业已存在";
+                return "该专业名称/编码已存在";
             }
+        }
+    }
+    //删除专业
+    @Override
+    public String deleteMajor(Integer id){
+        Optional<Major> majorInfo = majorRepository.findById(id);
+        Major major;
+        if(majorInfo.isPresent()){
+            major = majorInfo.get();
+            majorRepository.delete(major);
+            return "删除成功!";
+        }else{
+            return "id不存在";
         }
     }
 }

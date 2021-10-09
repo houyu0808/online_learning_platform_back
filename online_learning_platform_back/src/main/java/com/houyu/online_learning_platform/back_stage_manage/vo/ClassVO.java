@@ -5,12 +5,10 @@ import lombok.Data;
 import java.math.BigInteger;
 
 @Data
-public class MajorVO {
+public class ClassVO {
     private Integer id;
-    //专业名
-    private String majorName;
-    //专业编码
-    private BigInteger majorCode;
-    //所属学院
+    private String className;
+    private BigInteger classCode;
+    private BigInteger affiliatedMajorCode;
     private BigInteger affiliatedCollegeCode;
 }

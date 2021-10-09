@@ -2,6 +2,8 @@ package com.houyu.online_learning_platform.back_stage_manage.vo;
 
 import lombok.Data;
 
+import java.math.BigInteger;
+
 @Data
 public class TeacherVO {
     private Integer id;
@@ -12,7 +14,7 @@ public class TeacherVO {
     //性别
     private String sex;
     //工号
-    private Integer employeeNumber;
+    private BigInteger employeeNumber;
     //所属学院
-    private Integer affiliatedCollegeCode;
+    private BigInteger affiliatedCollegeCode;
 }

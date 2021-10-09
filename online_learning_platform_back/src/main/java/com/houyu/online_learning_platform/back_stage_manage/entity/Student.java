@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.math.BigInteger;
 
 @Getter
 @Setter
@@ -22,7 +23,17 @@ public class Student {
     //性别
     private String sex;
     //学号
-    private Integer stuNumber;
-    //所属学院
-    private Integer affiliatedCollegeCode;
+    private String stuNumber;
+    //所属班级编码
+    private BigInteger affiliatedClassCode;
+    //所属班级名称
+    private String affiliatedClassName;
+    //所属专业编码
+    private BigInteger affiliatedMajorCode;
+    //所属专业名称
+    private String affiliatedMajorName;
+    //所属学院编码
+    private BigInteger affiliatedCollegeCode;
+    //所属学院名称
+    private String affiliatedCollegeName;
 }

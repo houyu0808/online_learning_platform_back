@@ -7,11 +7,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigInteger;
 import java.util.List;
 
 @Repository
 public interface MajorRepository extends JpaRepository<Major, Integer> {
     Page<Major> findByMajorNameContaining(String majorName, Pageable pageable);
-    List<Major> findByMajorName(String collegeName);
-    List<Major> findByMajorCode(Integer collegeCode);
+    Major findByMajorName(String collegeName);
+    Major findByMajorCode(BigInteger collegeCode);
 }

@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.math.BigInteger;
 
 @Getter
 @Setter
@@ -18,5 +19,5 @@ public class College {
     //学院名
     private String collegeName;
     //学院代码
-    private Integer collegeCode;
+    private BigInteger collegeCode;
 }

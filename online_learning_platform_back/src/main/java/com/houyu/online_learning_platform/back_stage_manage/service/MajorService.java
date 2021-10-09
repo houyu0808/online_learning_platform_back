@@ -7,9 +7,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
-public interface majorService {
+public interface MajorService {
     //获取专业列表
     Page<Major> getMajorList(String majorName, Pageable pageable);
     //新建专业
     String saveMajor(MajorVO majorVO);
+    //删除专业
+    String deleteMajor(Integer id);
 }
