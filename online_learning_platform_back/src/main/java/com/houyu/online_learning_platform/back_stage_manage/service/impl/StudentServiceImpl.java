@@ -46,13 +46,19 @@ public class StudentServiceImpl implements StudentService {
             }else{
                 return "id不存在";
             }
-            BeanUtils.copyProperties(studentVO,student);
-            studentRepository.save(student);
-            return "更新成功!";
+            Student studentX =studentRepository.findByStuNumber(studentVO.getStuNumber());
+            if(studentX == null){
+                studentVO.setStuNumber(student.getStuNumber());
+                studentVO.setPassword(student.getPassword());
+                BeanUtils.copyProperties(studentVO,student);
+                studentRepository.save(student);
+                return "更新成功!";
+            }else {
+                return "该学生学号已存在";
+            }
         }else{
-            List<Student> student1 = studentRepository.findByUsername(studentVO.getUsername());
-            List<Student> student2 =studentRepository.findByStuNumber(studentVO.getStuNumber());
-            if(student1.isEmpty() && student2.isEmpty()){
+            Student studentX =studentRepository.findByStuNumber(studentVO.getStuNumber());
+            if(studentX == null){
                 Student student = new Student();
                 student.setIdentify(studentVO.getIdentify());
                 student.setUsername(studentVO.getUsername());
@@ -67,7 +73,7 @@ public class StudentServiceImpl implements StudentService {
                 studentRepository.save(student);
                 return "创建成功!";
             }else{
-                return "该学生姓名/学号已存在";
+                return "该学生学号已存在";
             }
         }
     }

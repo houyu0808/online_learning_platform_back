@@ -41,19 +41,24 @@ public class MajorServiceImpl implements MajorService {
             }else{
                 return "id不存在";
             }
-            BeanUtils.copyProperties(majorVO,major);
-            majorRepository.save(major);
-            return "更新成功!";
+            Major major1 = majorRepository.findByMajorName(majorVO.getMajorName());
+            Major major2 =majorRepository.findByMajorCode(majorVO.getMajorCode());
+            if(major1 == null && major2 == null){
+                BeanUtils.copyProperties(majorVO,major);
+                majorRepository.save(major);
+                return "更新成功!";
+            }else{
+                return "该专业名称/编码已存在";
+            }
         }else{
             Major major1 = majorRepository.findByMajorName(majorVO.getMajorName());
             Major major2 =majorRepository.findByMajorCode(majorVO.getMajorCode());
-            College college = collegeRepository.findByCollegeCode(majorVO.getAffiliatedCollegeCode());
             if(major1 == null && major2 == null){
                 Major major = new Major();
                 major.setMajorName(majorVO.getMajorName());
                 major.setMajorCode(majorVO.getMajorCode());
                 major.setAffiliatedCollegeCode(majorVO.getAffiliatedCollegeCode());
-                major.setAffiliatedCollegeName(college.getCollegeName());
+                major.setAffiliatedCollegeName(collegeRepository.findByCollegeCode(majorVO.getAffiliatedCollegeCode()).getCollegeName());
                 majorRepository.save(major);
                 return "创建成功!";
             }else{

@@ -11,10 +11,12 @@ public class TeacherVO {
     private String identify;
     //用户名
     private String username;
+    private String password;
+    private String phoneNumber;
     //性别
     private String sex;
     //工号
-    private BigInteger employeeNumber;
+    private String employeeNumber;
     //所属学院
     private BigInteger affiliatedCollegeCode;
 }

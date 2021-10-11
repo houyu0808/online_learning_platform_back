@@ -23,7 +23,13 @@ public class Teacher {
     //性别
     private String sex;
     //工号
-    private BigInteger employeeNumber;
-    //所属学院
+    private String employeeNumber;
+    //密码
+    private String password;
+    //电话号码
+    private String phoneNumber;
+    //所属学院编码
     private BigInteger affiliatedCollegeCode;
+    //所属学院姓名
+    private String affiliatedCollegeName;
 }

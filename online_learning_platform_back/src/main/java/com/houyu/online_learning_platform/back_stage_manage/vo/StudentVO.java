@@ -15,6 +15,8 @@ public class StudentVO {
     private String sex;
     //学号
     private String stuNumber;
+    private String password;
+    private String phoneNumber;
     //所属班级
     private BigInteger affiliatedClassCode;
     //所属专业

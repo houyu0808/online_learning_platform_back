@@ -11,12 +11,9 @@ import javax.persistence.Table;
 @Setter
 @Table(name="user_information")
 @Entity
-public class User {
+public class Admin {
     @Id
     private Integer id;
     private String username;
     private String password;
-    private String institute;
-    private Long stuNumber;
-    private String classAndGrades;
 }

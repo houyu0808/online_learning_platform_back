@@ -3,10 +3,8 @@ package com.houyu.online_learning_platform.loginAndRegister.vo;
 import lombok.Data;
 
 @Data
-public class UserVO {
+public class AdminVO {
     private Integer id;
     private String username;
     private String password;
-    private String institute;
-    private String classAndGrades;
 }

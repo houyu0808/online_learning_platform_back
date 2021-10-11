@@ -41,9 +41,15 @@ public class ClassServiceImpl implements ClassService {
             }else{
                 return "id不存在";
             }
-            BeanUtils.copyProperties(classVO,classX);
-            classRepository.save(classX);
-            return "更新成功!";
+            Class class1 = classRepository.findByClassName(classVO.getClassName());
+            Class class2 =classRepository.findByClassCode(classVO.getClassCode());
+            if(class1 == null && class2 == null){
+                BeanUtils.copyProperties(classVO,classX);
+                classRepository.save(classX);
+                return "更新成功!";
+            }else{
+                return "该班级名称/编码已存在";
+            }
         }else{
             Class class1 = classRepository.findByClassName(classVO.getClassName());
             Class class2 =classRepository.findByClassCode(classVO.getClassCode());

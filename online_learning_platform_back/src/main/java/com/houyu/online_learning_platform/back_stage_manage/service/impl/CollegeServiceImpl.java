@@ -39,9 +39,15 @@ public class CollegeServiceImpl implements CollegeService {
             }else{
                 return "id不存在";
             }
-            BeanUtils.copyProperties(collegeVO,college);
-            collegeRepository.save(college);
-            return "更新成功!";
+            College college1 = collegeRepository.findByCollegeName(collegeVO.getCollegeName());
+            College college2 =collegeRepository.findByCollegeCode(collegeVO.getCollegeCode());
+            if(college1 == null && college2 == null){
+                BeanUtils.copyProperties(collegeVO,college);
+                collegeRepository.save(college);
+                return "更新成功!";
+            }else{
+                return "该学院名称/编码已存在";
+            }
         }else{
             College college1 = collegeRepository.findByCollegeName(collegeVO.getCollegeName());
             College college2 =collegeRepository.findByCollegeCode(collegeVO.getCollegeCode());
