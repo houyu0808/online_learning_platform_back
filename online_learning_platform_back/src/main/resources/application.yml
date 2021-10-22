@@ -1,8 +1,8 @@
 server:
   port: 8090
 spring:
-  profiles:
-    active: dev
+#  profiles:
+#    active: dev
   datasource:
     username: houyu1124
     password: houyu07181

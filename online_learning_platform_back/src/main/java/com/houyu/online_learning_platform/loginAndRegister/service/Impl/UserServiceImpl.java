@@ -7,7 +7,7 @@ import com.houyu.online_learning_platform.back_stage_manage.vo.TeacherVO;
 import com.houyu.online_learning_platform.loginAndRegister.dao.StudentsRepository;
 import com.houyu.online_learning_platform.loginAndRegister.dao.TeachersRepository;
 import com.houyu.online_learning_platform.loginAndRegister.service.UserService;
-import com.houyu.online_learning_platform.utils.token.generateToken;
+import com.houyu.online_learning_platform.utils.token.GenerateToken;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
                     student = student2;
                 }
                 if(student.getPassword().equals(password)){
-                    jwt_token = generateToken.createToken(username,student.getId(),student.getIdentify());
+                    jwt_token = GenerateToken.createToken(username,student.getId(),student.getIdentify());
                     httpServletResponse.addHeader("jwt-token",jwt_token);
                     return "登陆成功";
                 }else{
@@ -59,7 +59,7 @@ public class UserServiceImpl implements UserService {
                     teacher = teacher2;
                 }
                 if(teacher.getPassword().equals(password)){
-                    jwt_token = generateToken.createToken(username,teacher.getId(),teacher.getIdentify());
+                    jwt_token = GenerateToken.createToken(username,teacher.getId(),teacher.getIdentify());
                     httpServletResponse.addHeader("jwt-token",jwt_token);
                     return "登陆成功";
                 }else{

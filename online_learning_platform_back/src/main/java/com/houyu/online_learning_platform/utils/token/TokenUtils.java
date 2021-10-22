@@ -10,17 +10,20 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Date;
 
 @Configuration
-public class tokenUtils implements HandlerInterceptor {
+public class TokenUtils implements HandlerInterceptor {
 
     @Value("${app.auther}")
     private String auther;
     //拦截Request 校验token
+    private static String autherTmp;
+
     @Override
     public boolean preHandle(HttpServletRequest request,HttpServletResponse response,Object o) throws Exception{
         String method = request.getMethod();
@@ -48,7 +51,7 @@ public class tokenUtils implements HandlerInterceptor {
                 String type = jwt.getType();    //获取token类型
                 String issuer = jwt.getIssuer();    //获取token发布者
                 Date expiresAt = jwt.getExpiresAt(); //获取token过期时间
-                if(issuer.equals("houyu")&&expiresAt.after(nowTime)){
+                if(issuer.equals(autherTmp)&&expiresAt.after(nowTime)){
                     return true;
                 }else{
                     falseResult(response);
@@ -67,5 +70,9 @@ public class tokenUtils implements HandlerInterceptor {
         response.setContentType("application/json; charset=utf-8");
         ObjectMapper objectMapper = new ObjectMapper();
         response.getWriter().println(objectMapper.writeValueAsString(ResponseMessage.error("token验证失败!")));
+    }
+    @PostConstruct
+    public void init() {
+        autherTmp = this.auther;
     }
 }
