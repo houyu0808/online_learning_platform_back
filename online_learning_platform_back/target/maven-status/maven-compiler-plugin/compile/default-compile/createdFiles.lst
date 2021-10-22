@@ -1,11 +1,5 @@
 com\houyu\online_learning_platform\OnlineLearningPlatformApplication.class
-com\houyu\online_learning_platform\utils\token\generateToken.class
-com\houyu\online_learning_platform\login\service\Impl\UserLoginServiceImpl.class
-com\houyu\online_learning_platform\login\controller\UserAndTeacherLoginController.class
-com\houyu\online_learning_platform\login\dao\UserLoginRepository.class
-com\houyu\online_learning_platform\utils\responseMessage\ResponseMessage.class
-com\houyu\online_learning_platform\login\entity\User.class
-com\houyu\online_learning_platform\utils\responseMessage\Response.class
-com\houyu\online_learning_platform\login\vo\UserVO.class
-com\houyu\online_learning_platform\login\service\UserLoginService.class
 com\houyu\online_learning_platform\utils\token\tokenUtils.class
+com\houyu\online_learning_platform\utils\responseMessage\Response.class
+com\houyu\online_learning_platform\utils\token\generateToken.class
+com\houyu\online_learning_platform\utils\responseMessage\ResponseMessage.class

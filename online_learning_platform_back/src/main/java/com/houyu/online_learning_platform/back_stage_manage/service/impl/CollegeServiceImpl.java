@@ -1,6 +1,6 @@
 package com.houyu.online_learning_platform.back_stage_manage.service.impl;
 
-import com.houyu.online_learning_platform.back_stage_manage.dao.CollegeRepository;
+import com.houyu.online_learning_platform.back_stage_manage.dao.*;
 import com.houyu.online_learning_platform.back_stage_manage.entity.College;
 import com.houyu.online_learning_platform.back_stage_manage.service.CollegeService;
 import com.houyu.online_learning_platform.back_stage_manage.vo.CollegeVO;
@@ -21,6 +21,16 @@ import java.util.Optional;
 public class CollegeServiceImpl implements CollegeService {
     @Autowired
     private CollegeRepository collegeRepository;
+    @Autowired
+    private MajorRepository majorRepository;
+    @Autowired
+    private ClassRepository classRepository;
+    @Autowired
+    private StudentRepository studentRepository;
+    @Autowired
+    private CourseRepository courseRepository;
+    @Autowired
+    private TeacherRepository teacherRepository;
 
     //获取学院列表
     @Override
@@ -70,6 +80,11 @@ public class CollegeServiceImpl implements CollegeService {
         if(collegeInfo.isPresent()){
             college = collegeInfo.get();
             collegeRepository.delete(college);
+            majorRepository.deleteAllByAffiliatedCollegeCode(college.getCollegeCode());
+            classRepository.deleteAllByAffiliatedCollegeCode(college.getCollegeCode());
+            studentRepository.deleteAllByAffiliatedCollegeCode(college.getCollegeCode());
+            teacherRepository.deleteAllByAffiliatedCollegeCode(college.getCollegeCode());
+            courseRepository.deleteAllByAffiliatedCollegeCode(college.getCollegeCode());
             return "删除成功!";
         }else{
             return "id不存在";

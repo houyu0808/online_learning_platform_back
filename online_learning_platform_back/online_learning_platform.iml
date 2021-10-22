@@ -37,8 +37,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-jdbc:2.5.4" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter:2.5.4" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot:2.5.4" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-autoconfigure:2.5.4" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-logging:2.5.4" level="project" />
     <orderEntry type="library" name="Maven: ch.qos.logback:logback-classic:1.2.5" level="project" />
     <orderEntry type="library" name="Maven: ch.qos.logback:logback-core:1.2.5" level="project" />
@@ -130,5 +128,22 @@
     <orderEntry type="library" name="Maven: commons-codec:commons-codec:1.15" level="project" />
     <orderEntry type="library" name="Maven: io.jsonwebtoken:jjwt:0.9.1" level="project" />
     <orderEntry type="library" name="Maven: com.vaadin.external.google:android-json:0.0.20131108.vaadin1" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-devtools:2.5.4" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot:2.5.4" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-autoconfigure:2.5.4" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-data-redis:2.5.4" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.data:spring-data-redis:2.5.4" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.data:spring-data-keyvalue:2.5.4" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-oxm:5.3.9" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-context-support:5.3.9" level="project" />
+    <orderEntry type="library" name="Maven: io.lettuce:lettuce-core:6.1.4.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-common:4.1.67.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-handler:4.1.67.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-resolver:4.1.67.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-buffer:4.1.67.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-codec:4.1.67.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-transport:4.1.67.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.projectreactor:reactor-core:3.4.9" level="project" />
+    <orderEntry type="library" name="Maven: org.reactivestreams:reactive-streams:1.0.3" level="project" />
   </component>
 </module>

@@ -8,6 +8,13 @@ spring:
     password: houyu07181
     url: jdbc:mysql://localhost:3307/learning_platform?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8&useSSL=false
     driver-class-name: com.mysql.cj.jdbc.Driver
+  devtools:
+    restart:
+      enabled: true  #设置开启热部署
+      additional-paths: src/main/java #重启目录
+      exclude: WEB-INF/**
+    freemarker:
+      cache: false    #页面不加载缓存，修改即时生效
   flyway:
     # 是否启用flyway
     enabled: false
@@ -25,6 +32,18 @@ spring:
     validate-on-migrate: true
     # 当迁移发现数据库非空且存在没有元数据的表时，自动执行基准迁移，新建schema_version表
     baseline-on-migrate: true
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password: houyu07181
+    jedis:
+      pool:
+        max-active: 8
+        max-wait: -1
+        max-idle: 500
+        min-idle: 0
+    lettuce:
+      shutdown-timeout: 0
 app:
   jwtExpirationAt: 86400000
   secret: JKKLJOoasdlfj

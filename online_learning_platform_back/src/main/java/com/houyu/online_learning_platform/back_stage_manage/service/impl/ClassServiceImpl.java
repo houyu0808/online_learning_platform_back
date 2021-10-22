@@ -3,6 +3,7 @@ package com.houyu.online_learning_platform.back_stage_manage.service.impl;
 import com.houyu.online_learning_platform.back_stage_manage.dao.ClassRepository;
 import com.houyu.online_learning_platform.back_stage_manage.dao.CollegeRepository;
 import com.houyu.online_learning_platform.back_stage_manage.dao.MajorRepository;
+import com.houyu.online_learning_platform.back_stage_manage.dao.StudentRepository;
 import com.houyu.online_learning_platform.back_stage_manage.entity.Class;
 import com.houyu.online_learning_platform.back_stage_manage.service.ClassService;
 import com.houyu.online_learning_platform.back_stage_manage.vo.ClassVO;
@@ -24,6 +25,8 @@ public class ClassServiceImpl implements ClassService {
     private CollegeRepository collegeRepository;
     @Autowired
     private MajorRepository majorRepository;
+    @Autowired
+    private StudentRepository studentRepository;
 
     @Override
     public Page<Class> getClassList(String className, Pageable pageable) {
@@ -76,6 +79,7 @@ public class ClassServiceImpl implements ClassService {
         if(classInfo.isPresent()){
             classX = classInfo.get();
             classRepository.delete(classX);
+            studentRepository.deleteAllByAffiliatedClassCode(classX.getClassCode());
             return "删除成功!";
         }else{
             return "id不存在";

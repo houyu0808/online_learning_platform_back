@@ -15,4 +15,5 @@ public interface MajorRepository extends JpaRepository<Major, Integer> {
     Page<Major> findByMajorNameContaining(String majorName, Pageable pageable);
     Major findByMajorName(String collegeName);
     Major findByMajorCode(BigInteger collegeCode);
+    void deleteAllByAffiliatedCollegeCode(BigInteger code);
 }

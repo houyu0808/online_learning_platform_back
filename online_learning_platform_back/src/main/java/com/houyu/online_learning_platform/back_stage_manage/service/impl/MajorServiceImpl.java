@@ -1,7 +1,6 @@
 package com.houyu.online_learning_platform.back_stage_manage.service.impl;
 
-import com.houyu.online_learning_platform.back_stage_manage.dao.CollegeRepository;
-import com.houyu.online_learning_platform.back_stage_manage.dao.MajorRepository;
+import com.houyu.online_learning_platform.back_stage_manage.dao.*;
 import com.houyu.online_learning_platform.back_stage_manage.entity.College;
 import com.houyu.online_learning_platform.back_stage_manage.entity.Major;
 import com.houyu.online_learning_platform.back_stage_manage.service.MajorService;
@@ -21,9 +20,14 @@ import java.util.Optional;
 public class MajorServiceImpl implements MajorService {
     @Autowired
     private MajorRepository majorRepository;
-
     @Autowired
     private CollegeRepository collegeRepository;
+    @Autowired
+    private StudentRepository studentRepository;
+    @Autowired
+    private ClassRepository classRepository;
+    @Autowired
+    private CourseRepository courseRepository;
     //获取专业列表
     @Override
     public Page<Major> getMajorList(String majorName, Pageable pageable){
@@ -74,6 +78,9 @@ public class MajorServiceImpl implements MajorService {
         if(majorInfo.isPresent()){
             major = majorInfo.get();
             majorRepository.delete(major);
+            studentRepository.deleteAllByAffiliatedMajorCode(major.getMajorCode());
+            classRepository.deleteAllByAffiliatedMajorCode(major.getMajorCode());
+            courseRepository.deleteAllByAffiliatedMajorCode(major.getMajorCode());
             return "删除成功!";
         }else{
             return "id不存在";

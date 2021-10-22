@@ -33,17 +33,16 @@ public class UserServiceImpl implements UserService {
             Student student2 = studentRepository.findByStuNumber(username);
             if(student1 != null || student2 != null){
                 Student student;
-                if(student1 !=null){
+                if(student1 != null){
                     student = student1;
                 }else{
                     student = student2;
                 }
                 if(student.getPassword().equals(password)){
                     jwt_token = generateToken.createToken(username,student.getId(),student.getIdentify());
-                    httpServletResponse.addHeader("auth-token",jwt_token);
+                    httpServletResponse.addHeader("jwt-token",jwt_token);
                     return "登陆成功";
-                }else
-                {
+                }else{
                     return "密码错误!请重新输入!";
                 }
             }else{
@@ -61,7 +60,7 @@ public class UserServiceImpl implements UserService {
                 }
                 if(teacher.getPassword().equals(password)){
                     jwt_token = generateToken.createToken(username,teacher.getId(),teacher.getIdentify());
-                    httpServletResponse.addHeader("auth-token",jwt_token);
+                    httpServletResponse.addHeader("jwt-token",jwt_token);
                     return "登陆成功";
                 }else{
                     return "密码错误!请重新输入!";
@@ -74,23 +73,28 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String studentRegister(StudentVO studentVO) {
-        Student student = studentRepository.findByStuNumber(studentVO.getStuNumber());
-        if(student == null){
+        Student student1 = studentRepository.findByStuNumber(studentVO.getStuNumber());
+        Student student2 = studentRepository.findByPhoneNumber(studentVO.getPhoneNumber());
+        if(student1 == null){
             return "学号不存在！请重新输入！";
         }else{
-            if(student.getUsername().equals(studentVO.getUsername())){
-                if(student.getPassword() != null && student.getPhoneNumber() != null){
-                    return "该学生信息已经完成注册！";
+            if(student1.getUsername().equals(studentVO.getUsername())){
+                if(student2 != null){
+                    return "该手机号已被注册，请确认以后再输入!";
                 }else{
-                    studentVO.setId(student.getId());
-                    studentVO.setIdentify(student.getIdentify());
-                    studentVO.setSex(student.getSex());
-                    studentVO.setAffiliatedClassCode(student.getAffiliatedClassCode());
-                    studentVO.setAffiliatedCollegeCode(student.getAffiliatedCollegeCode());
-                    studentVO.setAffiliatedMajorCode(student.getAffiliatedMajorCode());
-                    BeanUtils.copyProperties(studentVO,student);
-                    studentRepository.save(student);
-                    return "注册成功!";
+                    if(student1.getPassword() != null && student1.getPhoneNumber() != null){
+                        return "该学生信息已经完成注册！";
+                    }else{
+                        studentVO.setId(student1.getId());
+                        studentVO.setIdentify(student1.getIdentify());
+                        studentVO.setSex(student1.getSex());
+                        studentVO.setAffiliatedClassCode(student1.getAffiliatedClassCode());
+                        studentVO.setAffiliatedCollegeCode(student1.getAffiliatedCollegeCode());
+                        studentVO.setAffiliatedMajorCode(student1.getAffiliatedMajorCode());
+                        BeanUtils.copyProperties(studentVO,student1);
+                        studentRepository.save(student1);
+                        return "注册成功!";
+                    }
                 }
             }else{
                 return "学生信息错误!请重新输入!";
@@ -100,21 +104,26 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String teacherRegister(TeacherVO teacherVO) {
-       Teacher teacher = teacherRepository.findByEmployeeNumber(teacherVO.getEmployeeNumber());
-        if(teacher == null){
+       Teacher teacher1 = teacherRepository.findByEmployeeNumber(teacherVO.getEmployeeNumber());
+       Teacher teacher2 = teacherRepository.findByPhoneNumber(teacherVO.getPhoneNumber());
+        if(teacher1 == null){
             return "工号不存在！请重新输入！";
         }else{
-            if(teacher.getUsername().equals(teacherVO.getUsername())){
-                if(teacher.getPassword() != null && teacher.getPhoneNumber() != null){
-                    return "该教师信息已经完成注册！";
+            if(teacher1.getUsername().equals(teacherVO.getUsername())){
+                if(teacher2 != null){
+                    return "该手机号已被注册，请确认以后再输入!";
                 }else{
-                    teacherVO.setId(teacher.getId());
-                    teacherVO.setIdentify(teacher.getIdentify());
-                    teacherVO.setSex(teacher.getSex());
-                    teacherVO.setAffiliatedCollegeCode(teacher.getAffiliatedCollegeCode());
-                    BeanUtils.copyProperties(teacherVO,teacher);
-                    teacherRepository.save(teacher);
-                    return "注册成功!";
+                    if(teacher1.getPassword() != null && teacher1.getPhoneNumber() != null){
+                        return "该教师信息已经完成注册！";
+                    }else{
+                        teacherVO.setId(teacher1.getId());
+                        teacherVO.setIdentify(teacher1.getIdentify());
+                        teacherVO.setSex(teacher1.getSex());
+                        teacherVO.setAffiliatedCollegeCode(teacher1.getAffiliatedCollegeCode());
+                        BeanUtils.copyProperties(teacherVO,teacher1);
+                        teacherRepository.save(teacher1);
+                        return "注册成功!";
+                    }
                 }
             }else{
                 return "教师信息错误!请重新输入!";

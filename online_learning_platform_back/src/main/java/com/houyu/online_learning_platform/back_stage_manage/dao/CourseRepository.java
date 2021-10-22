@@ -12,4 +12,6 @@ import java.math.BigInteger;
 public interface CourseRepository extends JpaRepository<Course,Integer> {
     Page<Course> findByCourseNameContaining(String courseName, Pageable pageable);
     Course findByCourseCode(BigInteger courseCode);
+    void deleteAllByAffiliatedCollegeCode(BigInteger code);
+    void deleteAllByAffiliatedMajorCode(BigInteger code);
 }

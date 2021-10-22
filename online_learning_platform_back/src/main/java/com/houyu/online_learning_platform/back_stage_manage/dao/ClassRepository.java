@@ -13,4 +13,6 @@ public interface ClassRepository extends JpaRepository<Class, Integer> {
     Page<Class> findByClassNameContaining(String className, Pageable pageable);
     Class findByClassName(String className);
     Class findByClassCode(BigInteger classCode);
+    void deleteAllByAffiliatedCollegeCode(BigInteger code);
+    void deleteAllByAffiliatedMajorCode(BigInteger code);
 }

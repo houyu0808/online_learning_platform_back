@@ -10,12 +10,12 @@ public class ResponseMessage<T> {
     private Integer status;
 
     /**
-     * 成功或失败结果返回："success" or "fail"
+     * 成功或失败结果返回："success" or "error"
      */
     private String message;
 
     /**
-     * 成功时响应内容
+     * 响应内容
      */
     private T result;
 
