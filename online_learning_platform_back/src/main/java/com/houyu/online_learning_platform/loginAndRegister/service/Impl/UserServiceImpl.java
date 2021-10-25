@@ -40,7 +40,8 @@ public class UserServiceImpl implements UserService {
                 }
                 if(student.getPassword().equals(password)){
                     jwt_token = GenerateToken.createToken(username,student.getId(),student.getIdentify());
-                    httpServletResponse.addHeader("jwt-token",jwt_token);
+                    httpServletResponse.addHeader("token",jwt_token);
+                    httpServletResponse.addHeader("Access-Control-Expose-Headers", "token");
                     return "登陆成功";
                 }else{
                     return "密码错误!请重新输入!";
@@ -60,7 +61,8 @@ public class UserServiceImpl implements UserService {
                 }
                 if(teacher.getPassword().equals(password)){
                     jwt_token = GenerateToken.createToken(username,teacher.getId(),teacher.getIdentify());
-                    httpServletResponse.addHeader("jwt-token",jwt_token);
+                    httpServletResponse.addHeader("token",jwt_token);
+                    httpServletResponse.addHeader("Access-Control-Expose-Headers", "token");
                     return "登陆成功";
                 }else{
                     return "密码错误!请重新输入!";

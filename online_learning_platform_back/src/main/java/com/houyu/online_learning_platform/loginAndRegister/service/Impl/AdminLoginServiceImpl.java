@@ -25,8 +25,9 @@ public class AdminLoginServiceImpl implements AdminLoginService {
         if(user != null){
             if(user.getPassword().equals(password)){
                 String jwt_token = GenerateToken.createToken(username,user.getId(),"管理员");
-                httpServletResponse.addHeader("jwt-token",jwt_token);
-                return "登录成功";
+                httpServletResponse.addHeader("token",jwt_token);
+                httpServletResponse.addHeader("Access-Control-Expose-Headers", "token");
+                return "登陆成功";
             }else{
                 return "密码错误";
             }
