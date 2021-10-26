@@ -11,6 +11,7 @@ import com.houyu.online_learning_platform.utils.token.GenerateToken;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
@@ -129,6 +130,38 @@ public class UserServiceImpl implements UserService {
                 }
             }else{
                 return "教师信息错误!请重新输入!";
+            }
+        }
+    }
+
+    @Override
+    public String searchStudent(String stuNumber) {
+        if(stuNumber == null || stuNumber == ""){
+            return "1";
+        }else{
+            Student student = studentRepository.findByStuNumber(stuNumber);
+            if(ObjectUtils.isEmpty(student)){
+                return "2";
+            }else if(student.getPassword() != null || student.getPhoneNumber() != null){
+                return "3";
+            }else{
+                return student.getUsername();
+            }
+        }
+    }
+
+    @Override
+    public String searchTeacher(String employeeNumber) {
+        if(employeeNumber == null || employeeNumber == ""){
+            return "1";
+        }else{
+            Teacher teacher = teacherRepository.findByEmployeeNumber(employeeNumber);
+            if(ObjectUtils.isEmpty(teacher)){
+                return "2";
+            }else if(teacher.getPassword() != null || teacher.getPhoneNumber() != null){
+                return "3";
+            }else{
+                return teacher.getUsername();
             }
         }
     }

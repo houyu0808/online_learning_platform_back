@@ -9,4 +9,6 @@ public interface UserService {
     String userLogin(String username,String password,String identify);
     String studentRegister(StudentVO studentVO);
     String teacherRegister(TeacherVO teacherVO);
+    String searchStudent(String stuNumber);
+    String searchTeacher(String employeeNumber);
 }
