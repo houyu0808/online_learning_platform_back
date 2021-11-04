@@ -1,6 +1,7 @@
 package com.houyu.online_learning_platform.loginAndRegister.controller;
 
 import com.auth0.jwt.JWT;
+import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.houyu.online_learning_platform.back_stage_manage.vo.StudentVO;
 import com.houyu.online_learning_platform.back_stage_manage.vo.TeacherVO;
@@ -48,13 +49,23 @@ public class UserController {
     //学生注册
     @PostMapping("/studentregister")
     public ResponseMessage studentRegister(@RequestBody StudentVO studentVO) {
-        return ResponseMessage.ok(userService.studentRegister(studentVO));
+        String result = userService.studentRegister(studentVO);
+        if(result.equals("注册成功")){
+            return ResponseMessage.ok(result);
+        } else {
+            return ResponseMessage.error(500, result);
+        }
     }
 
     //教师注册
     @PostMapping("/teacherregister")
     public ResponseMessage teacherRegister(@RequestBody TeacherVO teacherVO) {
-        return ResponseMessage.ok(userService.teacherRegister(teacherVO));
+        String result = userService.teacherRegister(teacherVO);
+        if(result.equals("注册成功")){
+            return ResponseMessage.ok(result);
+        } else {
+            return ResponseMessage.error(500, result);
+        }
     }
 
     //token验证
@@ -62,9 +73,12 @@ public class UserController {
     public ResponseMessage validateToken(@RequestParam String token) {
         DecodedJWT jwt = JWT.decode(token);
         Date expiresAt = jwt.getExpiresAt();
-        return ResponseMessage.ok(expiresAt.after(new Date()));
+        if(expiresAt.after(new Date())){
+            return ResponseMessage.ok(jwt.getClaim("identify").asString());
+        }else{
+            return ResponseMessage.error(500, "登陆过期，请重新登录");
+        }
     }
-
     //根据学号判断学生注册情况
     @GetMapping("/searchstudent")
     public ResponseMessage searchStudent(@RequestParam String stuNumber) {
@@ -81,7 +95,7 @@ public class UserController {
 
         }
     }
-
+    //根据工号判断学生注册情况
     @GetMapping("/searchteacher")
     public ResponseMessage searchTeacher(@RequestParam String employeeNumber) {
         String teacher = userService.searchTeacher(employeeNumber);
@@ -94,6 +108,16 @@ public class UserController {
                 return ResponseMessage.error(500, "当前工号已被注册，需要重置请联系管理员");
             default:
                 return ResponseMessage.ok(teacher);
+        }
+    }
+    //修改密码
+    @PostMapping("/changepassword")
+    public ResponseMessage changePassword(@RequestBody AdminDto adminDto){
+        String result = userService.changePassword(adminDto);
+        if(result.equals("密码修改成功")){
+            return ResponseMessage.ok(result);
+        } else {
+            return ResponseMessage.error(500, result);
         }
     }
 }

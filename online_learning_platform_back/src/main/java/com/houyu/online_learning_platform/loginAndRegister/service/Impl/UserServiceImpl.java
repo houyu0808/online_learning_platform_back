@@ -6,6 +6,7 @@ import com.houyu.online_learning_platform.back_stage_manage.vo.StudentVO;
 import com.houyu.online_learning_platform.back_stage_manage.vo.TeacherVO;
 import com.houyu.online_learning_platform.loginAndRegister.dao.StudentsRepository;
 import com.houyu.online_learning_platform.loginAndRegister.dao.TeachersRepository;
+import com.houyu.online_learning_platform.loginAndRegister.dto.AdminDto;
 import com.houyu.online_learning_platform.loginAndRegister.service.UserService;
 import com.houyu.online_learning_platform.utils.token.GenerateToken;
 import org.springframework.beans.BeanUtils;
@@ -42,7 +43,7 @@ public class UserServiceImpl implements UserService {
                 if(student.getPassword().equals(password)){
                     jwt_token = GenerateToken.createToken(username,student.getId(),student.getIdentify());
                     httpServletResponse.addHeader("token",jwt_token);
-                    httpServletResponse.addHeader("Access-Control-Expose-Headers", "token");
+                    httpServletResponse.setHeader("Access-Control-Expose-Headers","token");
                     return "登陆成功";
                 }else{
                     return "密码错误!请重新输入!";
@@ -63,7 +64,7 @@ public class UserServiceImpl implements UserService {
                 if(teacher.getPassword().equals(password)){
                     jwt_token = GenerateToken.createToken(username,teacher.getId(),teacher.getIdentify());
                     httpServletResponse.addHeader("token",jwt_token);
-                    httpServletResponse.addHeader("Access-Control-Expose-Headers", "token");
+                    httpServletResponse.setHeader("Access-Control-Expose-Headers","token");
                     return "登陆成功";
                 }else{
                     return "密码错误!请重新输入!";
@@ -96,7 +97,7 @@ public class UserServiceImpl implements UserService {
                         studentVO.setAffiliatedMajorCode(student1.getAffiliatedMajorCode());
                         BeanUtils.copyProperties(studentVO,student1);
                         studentRepository.save(student1);
-                        return "注册成功!";
+                        return "注册成功";
                     }
                 }
             }else{
@@ -125,7 +126,7 @@ public class UserServiceImpl implements UserService {
                         teacherVO.setAffiliatedCollegeCode(teacher1.getAffiliatedCollegeCode());
                         BeanUtils.copyProperties(teacherVO,teacher1);
                         teacherRepository.save(teacher1);
-                        return "注册成功!";
+                        return "注册成功";
                     }
                 }
             }else{
@@ -162,6 +163,49 @@ public class UserServiceImpl implements UserService {
                 return "3";
             }else{
                 return teacher.getUsername();
+            }
+        }
+    }
+
+    @Override
+    public String changePassword(AdminDto adminDto) {
+        if (adminDto.getIdentify().equals("学生")){
+            Student student = studentRepository.findByStuNumber(adminDto.getUsername());
+            if(student != null){
+                if(student.getPhoneNumber() == null ||student.getPassword() == null){
+                    return "该账号还未注册，请先完成注册";
+                }else{
+                    if(adminDto.getPassword().equals(student.getPassword())){
+                        Student student1 = new Student();
+                        BeanUtils.copyProperties(student,student1);
+                        student1.setPassword(adminDto.getNewPassword());
+                        studentRepository.save(student1);
+                        return "密码修改成功";
+                    }else{
+                        return "旧密码错误，请重新输入";
+                    }
+                }
+            }else{
+                return "该学号不存在";
+            }
+        }else{
+            Teacher teacher = teacherRepository.findByEmployeeNumber(adminDto.getUsername());
+            if(teacher != null){
+                if(teacher.getPhoneNumber() == null ||teacher.getPassword() == null){
+                    return "该账号还未注册，请先完成注册";
+                }else{
+                    if(adminDto.getPassword().equals(teacher.getPassword())){
+                        Teacher teacher1 = new Teacher();
+                        BeanUtils.copyProperties(teacher,teacher1);
+                        teacher1.setPassword(adminDto.getNewPassword());
+                        teacherRepository.save(teacher1);
+                        return "密码修改成功";
+                    }else{
+                        return "旧密码错误，请重新输入";
+                    }
+                }
+            }else{
+                return "该工号不存在";
             }
         }
     }
