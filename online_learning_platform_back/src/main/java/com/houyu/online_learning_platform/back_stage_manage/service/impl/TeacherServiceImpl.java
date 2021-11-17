@@ -23,8 +23,7 @@ public class TeacherServiceImpl implements TeacherService {
 
     @Override
     public Page<Teacher> getTeacherList(String username, Pageable pageable) {
-        Page<Teacher> teacherPage = teacherRepository.findByUsernameContaining(username,pageable);
-        return teacherPage;
+        return teacherRepository.findByUsernameContaining(username,pageable);
     }
 
     @Override

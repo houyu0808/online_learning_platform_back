@@ -31,8 +31,7 @@ public class MajorServiceImpl implements MajorService {
     //获取专业列表
     @Override
     public Page<Major> getMajorList(String majorName, Pageable pageable){
-        Page<Major> majorPage = majorRepository.findByMajorNameContaining(majorName,pageable);
-        return majorPage;
+        return majorRepository.findByMajorNameContaining(majorName,pageable);
     }
     //新建专业
     @Override

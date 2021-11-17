@@ -28,8 +28,7 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public Page<Course> getCourseList(String courseName, Pageable pageable) {
-        Page<Course> coursePage = courseRepository.findByCourseNameContaining(courseName,pageable);
-        return coursePage;
+        return courseRepository.findByCourseNameContaining(courseName,pageable);
     }
 
     @Override

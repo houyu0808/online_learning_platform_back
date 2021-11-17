@@ -1,16 +1,25 @@
 package com.houyu.online_learning_platform.utils.token;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
+    @Value("${path.videoPath}")
+    private String videoPath;
+    @Value("${path.imagePath}")
+    private String imagePath;
+    @Value("${path.uploadPath}")
+    private String uploadPath;
+
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         //需要拦截的路径，/**表示需要拦截所有请求
         String[] addPathPatterns={
-                "/**"
+//                "/**"
         };
         //不需要拦截的路径
         String [] excludePathPatterns={
@@ -24,6 +33,5 @@ public class WebConfig implements WebMvcConfigurer {
         //registry.addInterceptor(new tokenUtils())
         // .addPathPatterns(addPathPatterns)
         // .excludePathPatterns(excludePathPatterns);
-
     }
 }

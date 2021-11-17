@@ -44,10 +44,21 @@ spring:
         min-idle: 0
     lettuce:
       shutdown-timeout: 0
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 2048MB
+      max-request-size: 3000MB
+      file-size-threshold: 512KB
+      location: /
 app:
   jwtExpirationAt: 86400000
   secret: JKKLJOoasdlfj
   auther: houyu
+path:
+  uploadPath: file:///
+  videoPath: C:\Users\graduation_Project\video\
+  imagePath: C:\Users\graduation_Project\image\
 # feign相关配置
 feign:
   # Feign org.springframework.data.domain.Page编码和解码

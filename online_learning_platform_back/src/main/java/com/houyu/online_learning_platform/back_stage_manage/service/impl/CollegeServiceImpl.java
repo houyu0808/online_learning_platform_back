@@ -35,8 +35,7 @@ public class CollegeServiceImpl implements CollegeService {
     //获取学院列表
     @Override
     public Page<College> getCollegeList(String collegeName,Pageable pageable){
-        Page<College> collegePage = collegeRepository.findByCollegeNameContaining(collegeName,pageable);
-        return collegePage;
+        return collegeRepository.findByCollegeNameContaining(collegeName,pageable);
     }
     //新建、更新学院
     @Override

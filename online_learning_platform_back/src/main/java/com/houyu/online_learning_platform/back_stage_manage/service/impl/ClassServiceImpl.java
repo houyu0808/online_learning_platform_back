@@ -30,8 +30,7 @@ public class ClassServiceImpl implements ClassService {
 
     @Override
     public Page<Class> getClassList(String className, Pageable pageable) {
-        Page<Class> classPage = classRepository.findByClassNameContaining(className,pageable);
-        return classPage;
+        return classRepository.findByClassNameContaining(className,pageable);
     }
 
     @Override

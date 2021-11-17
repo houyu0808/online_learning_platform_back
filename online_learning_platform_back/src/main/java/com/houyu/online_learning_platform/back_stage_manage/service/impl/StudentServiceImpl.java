@@ -32,8 +32,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Page<Student> getStudentList(String username, Pageable pageable){
-        Page<Student> studentPage = studentRepository.findByUsernameContaining(username,pageable);
-        return studentPage;
+        return studentRepository.findByUsernameContaining(username,pageable);
     }
 
     @Override
