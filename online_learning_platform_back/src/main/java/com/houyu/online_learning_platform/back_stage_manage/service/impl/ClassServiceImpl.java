@@ -12,8 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -48,7 +50,7 @@ public class ClassServiceImpl implements ClassService {
             if(class1 == null && class2 == null){
                 BeanUtils.copyProperties(classVO,classX);
                 classRepository.save(classX);
-                return "更新成功!";
+                return "更新成功";
             }else{
                 return "该班级名称/编码已存在";
             }
@@ -64,7 +66,7 @@ public class ClassServiceImpl implements ClassService {
                 classInfo.setAffiliatedMajorCode(classVO.getAffiliatedMajorCode());
                 classInfo.setAffiliatedMajorName(majorRepository.findByMajorCode(classVO.getAffiliatedMajorCode()).getMajorName());
                 classRepository.save(classInfo);
-                return "创建成功!";
+                return "创建成功";
             }else{
                 return "该班级名称/编码已存在";
             }
@@ -72,16 +74,21 @@ public class ClassServiceImpl implements ClassService {
     }
 
     @Override
-    public String deleteClass(Integer id) {
-        Optional<Class> classInfo = classRepository.findById(id);
-        Class classX;
-        if(classInfo.isPresent()){
-            classX = classInfo.get();
-            classRepository.delete(classX);
-            studentRepository.deleteAllByAffiliatedClassCode(classX.getClassCode());
-            return "删除成功!";
-        }else{
-            return "id不存在";
+    public String deleteClass(Integer[] ids) {
+        for(Integer id:ids){
+            Class classX = classRepository.findById(id).get();
+            if(!ObjectUtils.isEmpty(classX)){
+                classRepository.delete(classX);
+                studentRepository.deleteAllByAffiliatedClassCode(classX.getClassCode());
+            }
         }
+        return "删除成功!";
+    }
+    @Override
+    public ClassVO getClassById(Integer id){
+        Class classX = classRepository.findById(id).get();
+        ClassVO classVO = new ClassVO();
+        BeanUtils.copyProperties(classX,classVO);
+        return classVO;
     }
 }

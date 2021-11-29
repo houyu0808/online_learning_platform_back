@@ -13,4 +13,5 @@ public class MajorVO {
     private BigInteger majorCode;
     //所属学院
     private BigInteger affiliatedCollegeCode;
+    private String affiliatedCollegeName;
 }

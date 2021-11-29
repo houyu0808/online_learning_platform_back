@@ -6,6 +6,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public interface StudentService {
     //获取学生列表
@@ -13,5 +15,6 @@ public interface StudentService {
     //新建学生信息
     String saveStudent(StudentVO studentVO);
     //删除学生信息
-    String deleteStudent(Integer id);
+    String deleteStudent(Integer[] ids);
+    StudentVO getStudentById(Integer id);
 }

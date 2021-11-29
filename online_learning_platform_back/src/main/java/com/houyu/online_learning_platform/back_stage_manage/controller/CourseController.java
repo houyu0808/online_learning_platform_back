@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.criteria.CriteriaBuilder;
+import java.util.List;
 
 @RestController
 @RequestMapping("/course")
@@ -22,12 +23,21 @@ public class CourseController {
 
     @PostMapping("/savecourse")
     public ResponseMessage saveCourse(@RequestBody CourseVO courseVO){
-        return ResponseMessage.ok(courseService.saveCourse(courseVO));
+        String result = courseService.saveCourse(courseVO);
+        if(result.equals("更新成功") || result.equals("创建成功")){
+            return ResponseMessage.ok(result);
+        }else{
+            return ResponseMessage.error(500,result);
+        }
     }
 
-    @GetMapping("deletecourse")
-    public ResponseMessage deleteCourse(@RequestParam Integer id){
-        return ResponseMessage.ok(courseService.deleteCourse(id));
+    @GetMapping("/deletecourse")
+    public ResponseMessage deleteCourse(@RequestParam Integer[] ids){
+        return ResponseMessage.ok(courseService.deleteCourse(ids));
     }
 
+    @GetMapping("/getcoursebyid")
+    public ResponseMessage getCourseById(@RequestParam Integer id){
+        return ResponseMessage.ok(courseService.getCourseById(id));
+    }
 }

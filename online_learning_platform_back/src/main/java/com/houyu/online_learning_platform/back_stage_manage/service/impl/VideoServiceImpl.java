@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.rmi.ServerException;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -49,22 +50,24 @@ public class VideoServiceImpl implements VideoService {
     }
 
     @Override
-    public String deleteVideo(Integer id) {
-        Video video = videoRepository.findById(id).get();
-        if(ObjectUtils.isEmpty(video)){
-            throw new ServiceException("id不存在");
-        }else{
-            videoRepository.delete(video);
-            try{
-                File existFile1 = new File(video.getImagePath());
-                File existFile2 = new File(video.getVideoPath());
-                if(existFile1.exists()){existFile1.delete();}
-                if(existFile2.exists()){existFile2.delete();}
-                return "删除成功";
-            }catch (Exception e){
-                return "删除成功";
+    public String deleteVideo(Integer[] ids) {
+        for(Integer id : ids){
+            Video video = videoRepository.findById(id).get();
+            if(ObjectUtils.isEmpty(video)){
+                throw new ServiceException("id不存在");
+            }else{
+                videoRepository.delete(video);
+                try{
+                    File existFile1 = new File(video.getImagePath());
+                    File existFile2 = new File(video.getVideoPath());
+                    if(existFile1.exists()){existFile1.delete();}
+                    if(existFile2.exists()){existFile2.delete();}
+                }catch (Exception e){
+                    throw new Error("源文件不存在");
+                }
             }
         }
+        return "删除成功";
     }
 
     @Override
@@ -105,9 +108,9 @@ public class VideoServiceImpl implements VideoService {
                     videoRepository.save(video);
                     file2.transferTo(dest2);
                     file1.transferTo(dest1);
-                    return "上传成功";
+                    return "创建成功";
                 } catch (IOException e) {
-                    return "上传失败";
+                    return "创建失败";
                 }
             }
 
@@ -124,5 +127,13 @@ public class VideoServiceImpl implements VideoService {
         Teacher teacher = teacherRepository.findByEmployeeNumber(videoVO.getBelongTeacherCode());
         videoVO.setBelongCourseName(course.getCourseName());
         videoVO.setBelongTeacherName(teacher.getUsername());
+    }
+
+    @Override
+    public VideoVO getVideoById(Integer id){
+        Video video = videoRepository.findById(id).get();
+        VideoVO videoVO = new VideoVO();
+        BeanUtils.copyProperties(video,videoVO);
+        return videoVO;
     }
 }

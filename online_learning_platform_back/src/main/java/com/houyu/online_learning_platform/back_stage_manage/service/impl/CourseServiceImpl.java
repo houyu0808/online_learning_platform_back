@@ -7,13 +7,16 @@ import com.houyu.online_learning_platform.back_stage_manage.entity.College;
 import com.houyu.online_learning_platform.back_stage_manage.entity.Course;
 import com.houyu.online_learning_platform.back_stage_manage.service.CourseService;
 import com.houyu.online_learning_platform.back_stage_manage.vo.CourseVO;
+import io.netty.util.internal.ObjectUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -45,7 +48,7 @@ public class CourseServiceImpl implements CourseService {
             if(courseX == null){
                 BeanUtils.copyProperties(courseVO,course);
                 courseRepository.save(course);
-                return "更新成功!";
+                return "更新成功";
             }else{
                 return "该课程编码已存在";
             }
@@ -61,7 +64,7 @@ public class CourseServiceImpl implements CourseService {
                 courseInfo.setTeacher(courseVO.getTeacher());
                 courseInfo.setStatus(courseVO.getStatus());
                 courseRepository.save(courseInfo);
-                return "创建成功!";
+                return "创建成功";
             }else{
                 return "该课程编码已存在";
             }
@@ -69,7 +72,21 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public String deleteCourse(Integer id) {
-        return null;
+    public String deleteCourse(Integer[] ids) {
+        for(Integer id: ids){
+            Course course = courseRepository.findById(id).get();
+            if(!ObjectUtils.isEmpty(course)){
+                courseRepository.delete(course);
+            }
+        }
+        return "删除成功";
+    }
+
+    @Override
+    public CourseVO getCourseById(Integer id){
+        Course course = courseRepository.findById(id).get();
+        CourseVO courseVO = new CourseVO();
+        BeanUtils.copyProperties(course,courseVO);
+        return courseVO;
     }
 }

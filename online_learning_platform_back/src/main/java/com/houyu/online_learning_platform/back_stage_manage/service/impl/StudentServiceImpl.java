@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -51,7 +52,7 @@ public class StudentServiceImpl implements StudentService {
                 studentVO.setPassword(student.getPassword());
                 BeanUtils.copyProperties(studentVO,student);
                 studentRepository.save(student);
-                return "更新成功!";
+                return "更新成功";
             }else {
                 return "该学生学号已存在";
             }
@@ -70,7 +71,7 @@ public class StudentServiceImpl implements StudentService {
                 student.setAffiliatedMajorCode(studentVO.getAffiliatedMajorCode());
                 student.setAffiliatedMajorName(majorRepository.findByMajorCode(studentVO.getAffiliatedMajorCode()).getMajorName());
                 studentRepository.save(student);
-                return "创建成功!";
+                return "创建成功";
             }else{
                 return "该学生学号已存在";
             }
@@ -78,15 +79,20 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public String deleteStudent(Integer id) {
-        Optional<Student> studentInfo = studentRepository.findById(id);
-        Student student;
-        if(studentInfo.isPresent()){
-            student = studentInfo.get();
-            studentRepository.delete(student);
-            return "删除成功!";
-        }else{
-            return "id不存在";
+    public String deleteStudent(Integer[] ids) {
+        for(Integer id:ids){
+            Student student = studentRepository.findById(id).get();
+            if(!ObjectUtils.isEmpty(student)) {
+                studentRepository.delete(student);
+            }
         }
+        return "删除成功!";
+    }
+    @Override
+    public StudentVO getStudentById(Integer id){
+        Student student = studentRepository.findById(id).get();
+        StudentVO studentVO = new StudentVO();
+        BeanUtils.copyProperties(student,studentVO);
+        return studentVO;
     }
 }

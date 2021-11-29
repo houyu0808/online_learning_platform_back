@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -49,7 +50,7 @@ public class MajorServiceImpl implements MajorService {
             if(major1 == null && major2 == null){
                 BeanUtils.copyProperties(majorVO,major);
                 majorRepository.save(major);
-                return "更新成功!";
+                return "更新成功";
             }else{
                 return "该专业名称/编码已存在";
             }
@@ -63,7 +64,7 @@ public class MajorServiceImpl implements MajorService {
                 major.setAffiliatedCollegeCode(majorVO.getAffiliatedCollegeCode());
                 major.setAffiliatedCollegeName(collegeRepository.findByCollegeCode(majorVO.getAffiliatedCollegeCode()).getCollegeName());
                 majorRepository.save(major);
-                return "创建成功!";
+                return "创建成功";
             }else{
                 return "该专业名称/编码已存在";
             }
@@ -71,18 +72,24 @@ public class MajorServiceImpl implements MajorService {
     }
     //删除专业
     @Override
-    public String deleteMajor(Integer id){
-        Optional<Major> majorInfo = majorRepository.findById(id);
-        Major major;
-        if(majorInfo.isPresent()){
-            major = majorInfo.get();
-            majorRepository.delete(major);
-            studentRepository.deleteAllByAffiliatedMajorCode(major.getMajorCode());
-            classRepository.deleteAllByAffiliatedMajorCode(major.getMajorCode());
-            courseRepository.deleteAllByAffiliatedMajorCode(major.getMajorCode());
-            return "删除成功!";
-        }else{
-            return "id不存在";
+    public String deleteMajor(Integer[] ids){
+        for(Integer id: ids){
+            Major major = majorRepository.findById(id).get();
+            if(!ObjectUtils.isEmpty(major)) {
+                majorRepository.delete(major);
+                studentRepository.deleteAllByAffiliatedMajorCode(major.getMajorCode());
+                classRepository.deleteAllByAffiliatedMajorCode(major.getMajorCode());
+                courseRepository.deleteAllByAffiliatedMajorCode(major.getMajorCode());
+            }
         }
+        return "删除成功";
+    }
+
+    @Override
+    public MajorVO getMajorById(Integer id) {
+        Major major = majorRepository.findById(id).get();
+        MajorVO majorVO = new MajorVO();
+        BeanUtils.copyProperties(major,majorVO);
+        return majorVO;
     }
 }

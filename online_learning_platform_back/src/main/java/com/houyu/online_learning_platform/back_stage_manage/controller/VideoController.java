@@ -9,6 +9,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/video")
 public class VideoController {
@@ -17,7 +19,12 @@ public class VideoController {
 
     @PostMapping("/savevideo")
     public ResponseMessage saveVideoPage(@RequestParam("file1")MultipartFile file1,@RequestParam("file2")MultipartFile file2, VideoVO videoVO){
-        return ResponseMessage.ok(videoService.saveVideo(file1,file2,videoVO));
+        String result = videoService.saveVideo(file1,file2,videoVO);
+        if(result.equals("更新成功") || result.equals("创建成功")){
+            return ResponseMessage.ok(result);
+        }else{
+            return ResponseMessage.error(500,result);
+        }
     }
 
     @GetMapping("/getvideopage")
@@ -25,8 +32,12 @@ public class VideoController {
         return ResponseMessage.ok(videoService.getVideoPage(name,pageable));
     }
 
-    @GetMapping("deletevideo")
-    public ResponseMessage deleteVideo(@RequestParam Integer id){
-        return ResponseMessage.ok(videoService.deleteVideo(id));
+    @GetMapping("/deletevideo")
+    public ResponseMessage deleteVideo(@RequestParam Integer[] ids){
+        return ResponseMessage.ok(videoService.deleteVideo(ids));
+    }
+    @GetMapping("/getvideobyid")
+    public ResponseMessage getVideoById(@RequestParam Integer id){
+        return ResponseMessage.ok(videoService.getVideoById(id));
     }
 }

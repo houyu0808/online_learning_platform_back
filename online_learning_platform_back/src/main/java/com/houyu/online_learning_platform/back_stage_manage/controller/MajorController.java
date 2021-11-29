@@ -9,6 +9,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/major")
 public class MajorController {
@@ -23,11 +25,21 @@ public class MajorController {
     //新建、更新专业
     @PostMapping("/savemajor")
     public ResponseMessage saveMajor(@RequestBody MajorVO majorVO){
-        return ResponseMessage.ok(majorService.saveMajor(majorVO));
+        String result = majorService.saveMajor(majorVO);
+        if(result.equals("更新成功") || result.equals("创建成功")){
+            return ResponseMessage.ok(result);
+        }else{
+            return ResponseMessage.error(500,result);
+        }
     }
     //删除专业
     @GetMapping("deletemajor")
-    public  ResponseMessage deleteMajor(@RequestParam Integer id){
-        return ResponseMessage.ok(majorService.deleteMajor(id));
+    public  ResponseMessage deleteMajor(@RequestParam Integer[] ids){
+        return ResponseMessage.ok(majorService.deleteMajor(ids));
+    }
+
+    @GetMapping("getmajorbyid")
+    public  ResponseMessage getMajorById(@RequestParam Integer id){
+        return ResponseMessage.ok(majorService.getMajorById(id));
     }
 }

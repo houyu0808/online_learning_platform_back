@@ -53,7 +53,7 @@ public class CollegeServiceImpl implements CollegeService {
             if(college1 == null && college2 == null){
                 BeanUtils.copyProperties(collegeVO,college);
                 collegeRepository.save(college);
-                return "更新成功!";
+                return "更新成功";
             }else{
                 return "该学院名称/编码已存在";
             }
@@ -65,7 +65,7 @@ public class CollegeServiceImpl implements CollegeService {
                 collegeInfo.setCollegeName(collegeVO.getCollegeName());
                 collegeInfo.setCollegeCode(collegeVO.getCollegeCode());
                 collegeRepository.save(collegeInfo);
-                return "创建成功!";
+                return "创建成功";
             }else{
                 return "该学院名称/编码已存在";
             }
@@ -73,20 +73,27 @@ public class CollegeServiceImpl implements CollegeService {
     }
     //删除学院
     @Override
-    public String deleteCollege(Integer id){
-        Optional<College> collegeInfo = collegeRepository.findById(id);
-        College college;
-        if(collegeInfo.isPresent()){
-            college = collegeInfo.get();
-            collegeRepository.delete(college);
-            majorRepository.deleteAllByAffiliatedCollegeCode(college.getCollegeCode());
-            classRepository.deleteAllByAffiliatedCollegeCode(college.getCollegeCode());
-            studentRepository.deleteAllByAffiliatedCollegeCode(college.getCollegeCode());
-            teacherRepository.deleteAllByAffiliatedCollegeCode(college.getCollegeCode());
-            courseRepository.deleteAllByAffiliatedCollegeCode(college.getCollegeCode());
-            return "删除成功!";
-        }else{
-            return "id不存在";
+    public String deleteCollege(Integer[] ids){
+        for (Integer id:ids) {
+            College college = collegeRepository.findById(id).get();
+            if(!ObjectUtils.isEmpty(college)){
+                collegeRepository.delete(college);
+                majorRepository.deleteAllByAffiliatedCollegeCode(college.getCollegeCode());
+                classRepository.deleteAllByAffiliatedCollegeCode(college.getCollegeCode());
+                studentRepository.deleteAllByAffiliatedCollegeCode(college.getCollegeCode());
+                teacherRepository.deleteAllByAffiliatedCollegeCode(college.getCollegeCode());
+                courseRepository.deleteAllByAffiliatedCollegeCode(college.getCollegeCode());
+            }
         }
+        return "删除成功";
+    }
+
+    //根据id获取学院信息
+    @Override
+    public CollegeVO getCollegeById(Integer id) {
+        College college = collegeRepository.findById(id).get();
+        CollegeVO collegeVO = new CollegeVO();
+        BeanUtils.copyProperties(college,collegeVO);
+        return collegeVO;
     }
 }

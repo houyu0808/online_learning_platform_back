@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/student")
 public class StudentController {
@@ -20,11 +22,20 @@ public class StudentController {
 
     @PostMapping("/savestudent")
     public ResponseMessage saveStudent(@RequestBody StudentVO studentVO){
-        return ResponseMessage.ok(studentService.saveStudent(studentVO));
+        String result = studentService.saveStudent(studentVO);
+        if(result.equals("更新成功") || result.equals("创建成功")){
+            return ResponseMessage.ok(result);
+        }else{
+            return ResponseMessage.error(500,result);
+        }
     }
 
     @GetMapping("/deletestudent")
-    public ResponseMessage deleteStudent(Integer id){
-        return ResponseMessage.ok(studentService.deleteStudent(id));
+    public ResponseMessage deleteStudent(Integer[] ids){
+        return ResponseMessage.ok(studentService.deleteStudent(ids));
+    }
+    @GetMapping("/getstudentbyid")
+    public ResponseMessage getStudentById(Integer id){
+        return ResponseMessage.ok(studentService.getStudentById(id));
     }
 }

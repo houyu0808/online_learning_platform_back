@@ -6,9 +6,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public interface TeacherService {
     Page<Teacher> getTeacherList(String username, Pageable pageable);
     String saveTeacher(TeacherVO teacherVO);
-    String deleteTeacher(Integer id);
+    String deleteTeacher(Integer[] ids);
+    TeacherVO getTeacherById(Integer id);
 }

@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -42,7 +44,7 @@ public class TeacherServiceImpl implements TeacherService {
                 teacherVO.setPhoneNumber(teacher.getPhoneNumber());
                 BeanUtils.copyProperties(teacherVO, teacher);
                 teacherRepository.save(teacher);
-                return "更新成功!";
+                return "更新成功";
             }else{
                 return "该教师工号已存在";
             }
@@ -57,7 +59,7 @@ public class TeacherServiceImpl implements TeacherService {
                 teacher.setAffiliatedCollegeCode(teacherVO.getAffiliatedCollegeCode());
                 teacher.setAffiliatedCollegeName(collegeRepository.findByCollegeCode(teacherVO.getAffiliatedCollegeCode()).getCollegeName());
                 teacherRepository.save(teacher);
-                return "创建成功!";
+                return "创建成功";
             } else {
                 return "该教师工号已存在";
             }
@@ -65,15 +67,20 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
     @Override
-    public String deleteTeacher(Integer id) {
-        Optional<Teacher> teacherInfo = teacherRepository.findById(id);
-        Teacher teacher;
-        if (teacherInfo.isPresent()) {
-            teacher = teacherInfo.get();
-            teacherRepository.delete(teacher);
-            return "删除成功！";
-        } else {
-            return "id不存在";
+    public String deleteTeacher(Integer[] ids) {
+        for (Integer id:ids){
+            Teacher teacher= teacherRepository.findById(id).get();
+            if (!ObjectUtils.isEmpty(teacher)) {
+                teacherRepository.delete(teacher);
+            }
         }
+        return "删除成功！";
+    }
+    @Override
+    public TeacherVO getTeacherById(Integer id){
+        Teacher teacher = teacherRepository.findById(id).get();
+        TeacherVO teacherVO = new TeacherVO();
+        BeanUtils.copyProperties(teacher,teacherVO);
+        return teacherVO;
     }
 }

@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/class")
 public class ClassController {
@@ -19,10 +21,19 @@ public class ClassController {
     }
     @PostMapping("/saveclass")
     public  ResponseMessage saveClass(@RequestBody ClassVO classVO){
-        return ResponseMessage.ok(classService.saveClass(classVO));
+        String result = classService.saveClass(classVO);
+        if(result.equals("更新成功") || result.equals("创建成功")){
+            return ResponseMessage.ok(result);
+        }else{
+            return ResponseMessage.error(500,result);
+        }
     }
     @GetMapping("/deleteclass")
-    public ResponseMessage deleteClass(@RequestParam Integer id){
-        return ResponseMessage.ok(classService.deleteClass(id));
+    public ResponseMessage deleteClass(@RequestParam Integer[] ids){
+        return ResponseMessage.ok(classService.deleteClass(ids));
+    }
+    @GetMapping("/getclassbyid")
+    public  ResponseMessage getClassById(@RequestParam Integer id){
+        return ResponseMessage.ok(classService.getClassById(id));
     }
 }

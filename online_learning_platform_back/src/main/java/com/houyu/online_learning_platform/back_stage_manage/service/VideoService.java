@@ -8,9 +8,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 @Service
 public interface VideoService {
     Page<Video> getVideoPage(String name, Pageable pageable);
-    String deleteVideo(Integer id);
+    String deleteVideo(Integer[] ids);
     String saveVideo(MultipartFile file1,MultipartFile file2,VideoVO videoVO);
+    VideoVO getVideoById(Integer id);
 }
