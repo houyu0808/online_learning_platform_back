@@ -33,12 +33,12 @@ public class MajorController {
         }
     }
     //删除专业
-    @GetMapping("deletemajor")
+    @GetMapping("/deletemajor")
     public  ResponseMessage deleteMajor(@RequestParam Integer[] ids){
         return ResponseMessage.ok(majorService.deleteMajor(ids));
     }
 
-    @GetMapping("getmajorbyid")
+    @GetMapping("/getmajorbyid")
     public  ResponseMessage getMajorById(@RequestParam Integer id){
         return ResponseMessage.ok(majorService.getMajorById(id));
     }

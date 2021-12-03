@@ -50,7 +50,7 @@ public class CollegeServiceImpl implements CollegeService {
             }
             College college1 = collegeRepository.findByCollegeName(collegeVO.getCollegeName());
             College college2 =collegeRepository.findByCollegeCode(collegeVO.getCollegeCode());
-            if(college1 == null && college2 == null){
+            if(ObjectUtils.isEmpty(college1) && ObjectUtils.isEmpty(college2)){
                 BeanUtils.copyProperties(collegeVO,college);
                 collegeRepository.save(college);
                 return "更新成功";
@@ -60,14 +60,18 @@ public class CollegeServiceImpl implements CollegeService {
         }else{
             College college1 = collegeRepository.findByCollegeName(collegeVO.getCollegeName());
             College college2 =collegeRepository.findByCollegeCode(collegeVO.getCollegeCode());
-            if(college1 == null && college2 == null){
+            if(ObjectUtils.isEmpty(college1) && ObjectUtils.isEmpty(college2)){
                 College collegeInfo = new College();
                 collegeInfo.setCollegeName(collegeVO.getCollegeName());
                 collegeInfo.setCollegeCode(collegeVO.getCollegeCode());
                 collegeRepository.save(collegeInfo);
                 return "创建成功";
+            }else if(!ObjectUtils.isEmpty(college1) && ObjectUtils.isEmpty(college2)){
+                return "该学院名称已存在";
+            }else if(ObjectUtils.isEmpty(college1) && !ObjectUtils.isEmpty(college2)){
+                return "该学院编码已存在";
             }else{
-                return "该学院名称/编码已存在";
+                return "学院信息均已存在，创建失败";
             }
         }
     }

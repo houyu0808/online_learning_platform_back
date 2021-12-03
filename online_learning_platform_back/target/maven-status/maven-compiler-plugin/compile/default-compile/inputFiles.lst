@@ -1,4 +1,5 @@
 C:\Users\Administrator\Desktop\online_learning_platform_back\online_learning_platform_back\src\main\java\com\houyu\online_learning_platform\back_stage_manage\controller\CollegeController.java
+C:\Users\Administrator\Desktop\online_learning_platform_back\online_learning_platform_back\src\main\java\com\houyu\online_learning_platform\back_stage_manage\controller\VideoController.java
 C:\Users\Administrator\Desktop\online_learning_platform_back\online_learning_platform_back\src\main\java\com\houyu\online_learning_platform\back_stage_manage\dao\StudentRepository.java
 C:\Users\Administrator\Desktop\online_learning_platform_back\online_learning_platform_back\src\main\java\com\houyu\online_learning_platform\loginAndRegister\service\Impl\AdminLoginServiceImpl.java
 C:\Users\Administrator\Desktop\online_learning_platform_back\online_learning_platform_back\src\main\java\com\houyu\online_learning_platform\back_stage_manage\dao\MajorRepository.java
@@ -8,8 +9,11 @@ C:\Users\Administrator\Desktop\online_learning_platform_back\online_learning_pla
 C:\Users\Administrator\Desktop\online_learning_platform_back\online_learning_platform_back\src\main\java\com\houyu\online_learning_platform\loginAndRegister\service\UserService.java
 C:\Users\Administrator\Desktop\online_learning_platform_back\online_learning_platform_back\src\main\java\com\houyu\online_learning_platform\back_stage_manage\entity\Class.java
 C:\Users\Administrator\Desktop\online_learning_platform_back\online_learning_platform_back\src\main\java\com\houyu\online_learning_platform\back_stage_manage\controller\StudentController.java
+C:\Users\Administrator\Desktop\online_learning_platform_back\online_learning_platform_back\src\main\java\com\houyu\online_learning_platform\back_stage_manage\entity\Video.java
 C:\Users\Administrator\Desktop\online_learning_platform_back\online_learning_platform_back\src\main\java\com\houyu\online_learning_platform\loginAndRegister\dao\AdminLoginRepository.java
+C:\Users\Administrator\Desktop\online_learning_platform_back\online_learning_platform_back\src\main\java\com\houyu\online_learning_platform\back_stage_manage\service\impl\VideoServiceImpl.java
 C:\Users\Administrator\Desktop\online_learning_platform_back\online_learning_platform_back\src\main\java\com\houyu\online_learning_platform\back_stage_manage\service\impl\MajorServiceImpl.java
+C:\Users\Administrator\Desktop\online_learning_platform_back\online_learning_platform_back\src\main\java\com\houyu\online_learning_platform\utils\cros\WebMvcConfig.java
 C:\Users\Administrator\Desktop\online_learning_platform_back\online_learning_platform_back\src\main\java\com\houyu\online_learning_platform\utils\responseMessage\ResponseMessage.java
 C:\Users\Administrator\Desktop\online_learning_platform_back\online_learning_platform_back\src\main\java\com\houyu\online_learning_platform\back_stage_manage\service\StudentService.java
 C:\Users\Administrator\Desktop\online_learning_platform_back\online_learning_platform_back\src\main\java\com\houyu\online_learning_platform\loginAndRegister\dao\StudentsRepository.java
@@ -19,14 +23,19 @@ C:\Users\Administrator\Desktop\online_learning_platform_back\online_learning_pla
 C:\Users\Administrator\Desktop\online_learning_platform_back\online_learning_platform_back\src\main\java\com\houyu\online_learning_platform\back_stage_manage\dao\CollegeRepository.java
 C:\Users\Administrator\Desktop\online_learning_platform_back\online_learning_platform_back\src\main\java\com\houyu\online_learning_platform\back_stage_manage\entity\College.java
 C:\Users\Administrator\Desktop\online_learning_platform_back\online_learning_platform_back\src\main\java\com\houyu\online_learning_platform\back_stage_manage\service\ClassService.java
-C:\Users\Administrator\Desktop\online_learning_platform_back\online_learning_platform_back\src\main\java\com\houyu\online_learning_platform\utils\token\tokenUtils.java
+C:\Users\Administrator\Desktop\online_learning_platform_back\online_learning_platform_back\src\main\java\com\houyu\online_learning_platform\utils\token\TokenUtils.java
 C:\Users\Administrator\Desktop\online_learning_platform_back\online_learning_platform_back\src\main\java\com\houyu\online_learning_platform\back_stage_manage\vo\StudentVO.java
+C:\Users\Administrator\Desktop\online_learning_platform_back\online_learning_platform_back\src\main\java\com\houyu\online_learning_platform\utils\file\UploadFile.java
 C:\Users\Administrator\Desktop\online_learning_platform_back\online_learning_platform_back\src\main\java\com\houyu\online_learning_platform\back_stage_manage\service\TeacherService.java
+C:\Users\Administrator\Desktop\online_learning_platform_back\online_learning_platform_back\src\main\java\com\houyu\online_learning_platform\utils\redis\redisUtils.java
+C:\Users\Administrator\Desktop\online_learning_platform_back\online_learning_platform_back\src\main\java\com\houyu\online_learning_platform\back_stage_manage\dao\VideoRepository.java
 C:\Users\Administrator\Desktop\online_learning_platform_back\online_learning_platform_back\src\main\java\com\houyu\online_learning_platform\back_stage_manage\dao\ClassRepository.java
+C:\Users\Administrator\Desktop\online_learning_platform_back\online_learning_platform_back\src\main\java\com\houyu\online_learning_platform\utils\cros\CorsFilterConfig.java
 C:\Users\Administrator\Desktop\online_learning_platform_back\online_learning_platform_back\src\main\java\com\houyu\online_learning_platform\back_stage_manage\entity\Course.java
 C:\Users\Administrator\Desktop\online_learning_platform_back\online_learning_platform_back\src\main\java\com\houyu\online_learning_platform\back_stage_manage\controller\MajorController.java
 C:\Users\Administrator\Desktop\online_learning_platform_back\online_learning_platform_back\src\main\java\com\houyu\online_learning_platform\loginAndRegister\dao\TeachersRepository.java
-C:\Users\Administrator\Desktop\online_learning_platform_back\online_learning_platform_back\src\main\java\com\houyu\online_learning_platform\utils\token\generateToken.java
+C:\Users\Administrator\Desktop\online_learning_platform_back\online_learning_platform_back\src\main\java\com\houyu\online_learning_platform\back_stage_manage\vo\VideoVO.java
+C:\Users\Administrator\Desktop\online_learning_platform_back\online_learning_platform_back\src\main\java\com\houyu\online_learning_platform\utils\token\GenerateToken.java
 C:\Users\Administrator\Desktop\online_learning_platform_back\online_learning_platform_back\src\main\java\com\houyu\online_learning_platform\back_stage_manage\dao\CourseRepository.java
 C:\Users\Administrator\Desktop\online_learning_platform_back\online_learning_platform_back\src\main\java\com\houyu\online_learning_platform\loginAndRegister\controller\UserController.java
 C:\Users\Administrator\Desktop\online_learning_platform_back\online_learning_platform_back\src\main\java\com\houyu\online_learning_platform\back_stage_manage\entity\Teacher.java
@@ -36,6 +45,7 @@ C:\Users\Administrator\Desktop\online_learning_platform_back\online_learning_pla
 C:\Users\Administrator\Desktop\online_learning_platform_back\online_learning_platform_back\src\main\java\com\houyu\online_learning_platform\back_stage_manage\service\impl\TeacherServiceImpl.java
 C:\Users\Administrator\Desktop\online_learning_platform_back\online_learning_platform_back\src\main\java\com\houyu\online_learning_platform\loginAndRegister\service\AdminLoginService.java
 C:\Users\Administrator\Desktop\online_learning_platform_back\online_learning_platform_back\src\main\java\com\houyu\online_learning_platform\back_stage_manage\vo\CourseVO.java
+C:\Users\Administrator\Desktop\online_learning_platform_back\online_learning_platform_back\src\main\java\com\houyu\online_learning_platform\loginAndRegister\dto\AdminDto.java
 C:\Users\Administrator\Desktop\online_learning_platform_back\online_learning_platform_back\src\main\java\com\houyu\online_learning_platform\back_stage_manage\service\MajorService.java
 C:\Users\Administrator\Desktop\online_learning_platform_back\online_learning_platform_back\src\main\java\com\houyu\online_learning_platform\back_stage_manage\service\impl\ClassServiceImpl.java
 C:\Users\Administrator\Desktop\online_learning_platform_back\online_learning_platform_back\src\main\java\com\houyu\online_learning_platform\back_stage_manage\service\CollegeService.java
@@ -44,7 +54,8 @@ C:\Users\Administrator\Desktop\online_learning_platform_back\online_learning_pla
 C:\Users\Administrator\Desktop\online_learning_platform_back\online_learning_platform_back\src\main\java\com\houyu\online_learning_platform\loginAndRegister\service\Impl\UserServiceImpl.java
 C:\Users\Administrator\Desktop\online_learning_platform_back\online_learning_platform_back\src\main\java\com\houyu\online_learning_platform\back_stage_manage\vo\TeacherVO.java
 C:\Users\Administrator\Desktop\online_learning_platform_back\online_learning_platform_back\src\main\java\com\houyu\online_learning_platform\back_stage_manage\controller\CourseController.java
-C:\Users\Administrator\Desktop\online_learning_platform_back\online_learning_platform_back\src\main\java\com\houyu\online_learning_platform\utils\token\webConfig.java
+C:\Users\Administrator\Desktop\online_learning_platform_back\online_learning_platform_back\src\main\java\com\houyu\online_learning_platform\back_stage_manage\service\VideoService.java
+C:\Users\Administrator\Desktop\online_learning_platform_back\online_learning_platform_back\src\main\java\com\houyu\online_learning_platform\utils\token\WebConfig.java
 C:\Users\Administrator\Desktop\online_learning_platform_back\online_learning_platform_back\src\main\java\com\houyu\online_learning_platform\loginAndRegister\vo\AdminVO.java
 C:\Users\Administrator\Desktop\online_learning_platform_back\online_learning_platform_back\src\main\java\com\houyu\online_learning_platform\back_stage_manage\service\CourseService.java
 C:\Users\Administrator\Desktop\online_learning_platform_back\online_learning_platform_back\src\main\java\com\houyu\online_learning_platform\OnlineLearningPlatformApplication.java

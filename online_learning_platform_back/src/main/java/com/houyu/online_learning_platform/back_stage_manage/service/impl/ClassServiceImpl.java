@@ -47,7 +47,7 @@ public class ClassServiceImpl implements ClassService {
             }
             Class class1 = classRepository.findByClassName(classVO.getClassName());
             Class class2 =classRepository.findByClassCode(classVO.getClassCode());
-            if(class1 == null && class2 == null){
+            if(ObjectUtils.isEmpty(class1) && ObjectUtils.isEmpty(class2)){
                 BeanUtils.copyProperties(classVO,classX);
                 classRepository.save(classX);
                 return "更新成功";
@@ -57,7 +57,7 @@ public class ClassServiceImpl implements ClassService {
         }else{
             Class class1 = classRepository.findByClassName(classVO.getClassName());
             Class class2 =classRepository.findByClassCode(classVO.getClassCode());
-            if(class1 == null && class2 == null){
+            if(ObjectUtils.isEmpty(class1) && ObjectUtils.isEmpty(class2)){
                 Class classInfo = new Class();
                 classInfo.setClassName(classVO.getClassName());
                 classInfo.setClassCode(classVO.getClassCode());
@@ -67,8 +67,12 @@ public class ClassServiceImpl implements ClassService {
                 classInfo.setAffiliatedMajorName(majorRepository.findByMajorCode(classVO.getAffiliatedMajorCode()).getMajorName());
                 classRepository.save(classInfo);
                 return "创建成功";
+            }else if(!ObjectUtils.isEmpty(class1) && ObjectUtils.isEmpty(class2)){
+                return "该班级名称已存在";
+            }else if(ObjectUtils.isEmpty(class1) && !ObjectUtils.isEmpty(class2)){
+                return "该班级编码已存在";
             }else{
-                return "该班级名称/编码已存在";
+                return "班级信息均已存在，创建失败";
             }
         }
     }

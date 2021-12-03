@@ -47,7 +47,7 @@ public class MajorServiceImpl implements MajorService {
             }
             Major major1 = majorRepository.findByMajorName(majorVO.getMajorName());
             Major major2 =majorRepository.findByMajorCode(majorVO.getMajorCode());
-            if(major1 == null && major2 == null){
+            if(ObjectUtils.isEmpty(major1) && ObjectUtils.isEmpty(major2)){
                 BeanUtils.copyProperties(majorVO,major);
                 majorRepository.save(major);
                 return "更新成功";
@@ -57,7 +57,7 @@ public class MajorServiceImpl implements MajorService {
         }else{
             Major major1 = majorRepository.findByMajorName(majorVO.getMajorName());
             Major major2 =majorRepository.findByMajorCode(majorVO.getMajorCode());
-            if(major1 == null && major2 == null){
+            if(ObjectUtils.isEmpty(major1) && ObjectUtils.isEmpty(major2)){
                 Major major = new Major();
                 major.setMajorName(majorVO.getMajorName());
                 major.setMajorCode(majorVO.getMajorCode());
@@ -65,8 +65,12 @@ public class MajorServiceImpl implements MajorService {
                 major.setAffiliatedCollegeName(collegeRepository.findByCollegeCode(majorVO.getAffiliatedCollegeCode()).getCollegeName());
                 majorRepository.save(major);
                 return "创建成功";
+            }else if(!ObjectUtils.isEmpty(major1) && ObjectUtils.isEmpty(major2)){
+                return "该专业名称已存在";
+            }else if(ObjectUtils.isEmpty(major1) && !ObjectUtils.isEmpty(major2)){
+                return "该专业编码已存在";
             }else{
-                return "该专业名称/编码已存在";
+                return "专业信息均已存在，请重新创建";
             }
         }
     }
