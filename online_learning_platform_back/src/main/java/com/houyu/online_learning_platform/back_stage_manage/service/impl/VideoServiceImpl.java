@@ -30,10 +30,8 @@ import java.util.UUID;
 
 @Service
 public class VideoServiceImpl implements VideoService {
-    @Value("${path.videoPath}")
-    private String videoPath;
-    @Value("${path.imagePath}")
-    private String imagePath;
+    @Value("${oss.local.upload-file-path}")
+    private String uploadFilePath;
     @Value("${path.uploadPath}")
     private String uploadPath;
 
@@ -58,8 +56,10 @@ public class VideoServiceImpl implements VideoService {
             }else{
                 videoRepository.delete(video);
                 try{
-                    File existFile1 = new File(video.getImagePath());
-                    File existFile2 = new File(video.getVideoPath());
+                    String imageString = video.getImageUrl().replace(uploadFilePath,uploadPath);
+                    String videoString = video.getVideoUrl().replace(uploadFilePath,uploadPath);
+                    File existFile1 = new File(imageString);
+                    File existFile2 = new File(videoString);
                     if(existFile1.exists()){existFile1.delete();}
                     if(existFile2.exists()){existFile2.delete();}
                 }catch (Exception e){
@@ -71,28 +71,30 @@ public class VideoServiceImpl implements VideoService {
     }
 
     @Override
-    public String saveVideo(MultipartFile file1,MultipartFile file2,VideoVO videoVO ) {
-        if (file1.isEmpty() || file2.isEmpty()) {
+    public String saveVideo(MultipartFile[] file1,MultipartFile[] file2,VideoVO videoVO ) {
+        if (file1.length == 0 || file2.length == 0) {
             return "上传失败，请选择文件";
         }
-        String fileName1 = file1.getOriginalFilename();
-        String fileName2 = file2.getOriginalFilename();
+        String fileName1 = file1[0].getOriginalFilename();
+        String fileName2 = file2[0].getOriginalFilename();
         String newName1 = UUID.randomUUID().toString() + fileName1.substring(fileName1.lastIndexOf("."), fileName1.length());
         String newName2 = UUID.randomUUID().toString() + fileName2.substring(fileName2.lastIndexOf("."), fileName2.length());
-        File dest1 = new File(videoPath + newName1);
-        File dest2 = new File(imagePath + newName2);
+        File dest1 = new File(uploadFilePath + "/image/" + newName1);
+        File dest2 = new File(uploadFilePath + "/video/" + newName2);
         if(videoVO.getId() != null){
             Video video = videoRepository.findByVideoCode(videoVO.getVideoCode());
-            File existFile1 = new File(video.getImagePath());
-            File existFile2 = new File(video.getVideoPath());
+            String imageString = video.getImageUrl().replace(uploadFilePath,uploadPath);
+            String videoString = video.getVideoUrl().replace(uploadFilePath,uploadPath);
+            File existFile1 = new File(imageString);
+            File existFile2 = new File(videoString);
             if(existFile1.exists()){existFile1.delete();}
             if(existFile2.exists()){existFile2.delete();}
             copyVideo(videoVO,newName1,newName2);
             BeanUtils.copyProperties(videoVO,video);
             try {
                 videoRepository.save(video);
-                file2.transferTo(dest2);
-                file1.transferTo(dest1);
+                file2[0].transferTo(dest2);
+                file1[0].transferTo(dest1);
                 return "更新成功";
             } catch (IOException e) {
                 return "更新失败";
@@ -106,8 +108,8 @@ public class VideoServiceImpl implements VideoService {
                 BeanUtils.copyProperties(videoVO,video);
                 try {
                     videoRepository.save(video);
-                    file2.transferTo(dest2);
-                    file1.transferTo(dest1);
+                    file2[0].transferTo(dest2);
+                    file1[0].transferTo(dest1);
                     return "创建成功";
                 } catch (IOException e) {
                     return "创建失败";
@@ -119,10 +121,8 @@ public class VideoServiceImpl implements VideoService {
     }
     //复制视频信息
     public void copyVideo(VideoVO videoVO,String newName1,String newName2){
-        videoVO.setVideoPath(videoPath + newName1);
-        videoVO.setVideoUrl(uploadPath + videoPath + newName1);
-        videoVO.setImagePath(imagePath + newName2);
-        videoVO.setImageUrl(uploadPath + imagePath + newName2);
+        videoVO.setImageUrl(uploadPath +  "/image/" + newName1);
+        videoVO.setVideoUrl(uploadPath + "/video/" + newName2);
         Course course = courseRepository.findByCourseCode(videoVO.getBelongCourseCode());
         Teacher teacher = teacherRepository.findByEmployeeNumber(videoVO.getBelongTeacherCode());
         videoVO.setBelongCourseName(course.getCourseName());

@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
 import javax.transaction.Transactional;
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Optional;
 
@@ -88,5 +89,10 @@ public class CourseServiceImpl implements CourseService {
         CourseVO courseVO = new CourseVO();
         BeanUtils.copyProperties(course,courseVO);
         return courseVO;
+    }
+
+    @Override
+    public List<Course> getCourseByMajor(BigInteger majorCode) {
+        return courseRepository.findAllByAffiliatedMajorCode(majorCode);
     }
 }

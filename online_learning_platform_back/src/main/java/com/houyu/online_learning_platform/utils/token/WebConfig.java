@@ -8,12 +8,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
-    @Value("${path.videoPath}")
-    private String videoPath;
-    @Value("${path.imagePath}")
-    private String imagePath;
-    @Value("${path.uploadPath}")
-    private String uploadPath;
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
@@ -23,7 +17,9 @@ public class WebConfig implements WebMvcConfigurer {
         };
         //不需要拦截的路径
         String [] excludePathPatterns={
-                "/user/**"
+                "/user/**",
+                "/image/**",
+                "/video/**"
         };
         //注册一个登录拦截器
         registry.addInterceptor(new TokenUtils())

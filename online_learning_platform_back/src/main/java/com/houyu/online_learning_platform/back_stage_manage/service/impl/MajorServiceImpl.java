@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
 import javax.transaction.Transactional;
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Optional;
 
@@ -95,5 +96,10 @@ public class MajorServiceImpl implements MajorService {
         MajorVO majorVO = new MajorVO();
         BeanUtils.copyProperties(major,majorVO);
         return majorVO;
+    }
+
+    @Override
+    public List<Major> getMajorByCollege(BigInteger collegeCode) {
+        return majorRepository.findAllByAffiliatedCollegeCode(collegeCode);
     }
 }

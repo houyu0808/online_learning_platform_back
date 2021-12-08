@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
 import javax.transaction.Transactional;
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Optional;
 
@@ -94,5 +95,10 @@ public class ClassServiceImpl implements ClassService {
         ClassVO classVO = new ClassVO();
         BeanUtils.copyProperties(classX,classVO);
         return classVO;
+    }
+
+    @Override
+    public List<Class> getClassByMajor(BigInteger majorCode) {
+        return classRepository.getAllByAffiliatedMajorCode(majorCode);
     }
 }

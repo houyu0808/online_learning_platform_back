@@ -11,12 +11,8 @@ public class VideoVO {
     private String name;
     //视频编码
     private Integer videoCode;
-    //封面路径
-    private String imagePath;
     //封面访问路径
     private String imageUrl;
-    //视频路径
-    private String videoPath;
     //视频访问路径
     private String videoUrl;
     //所属课程id

@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigInteger;
 import java.util.List;
 
 @RestController
@@ -41,5 +42,10 @@ public class MajorController {
     @GetMapping("/getmajorbyid")
     public  ResponseMessage getMajorById(@RequestParam Integer id){
         return ResponseMessage.ok(majorService.getMajorById(id));
+    }
+
+    @GetMapping("/getmajorbycollege")
+    public ResponseMessage getMajorByCollege(@RequestParam BigInteger collegeCode){
+        return ResponseMessage.ok(majorService.getMajorByCollege(collegeCode));
     }
 }

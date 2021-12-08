@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.criteria.CriteriaBuilder;
+import java.math.BigInteger;
 import java.util.List;
 
 @RestController
@@ -39,5 +40,9 @@ public class CourseController {
     @GetMapping("/getcoursebyid")
     public ResponseMessage getCourseById(@RequestParam Integer id){
         return ResponseMessage.ok(courseService.getCourseById(id));
+    }
+    @GetMapping("/getcoursebymajor")
+    public ResponseMessage getCourseByMajor(@RequestParam BigInteger majorCode){
+        return ResponseMessage.ok();
     }
 }

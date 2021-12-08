@@ -16,4 +16,5 @@ public interface MajorRepository extends JpaRepository<Major, Integer> {
     Major findByMajorName(String collegeName);
     Major findByMajorCode(BigInteger collegeCode);
     void deleteAllByAffiliatedCollegeCode(BigInteger code);
+    List<Major> findAllByAffiliatedCollegeCode(BigInteger collegeCode);
 }

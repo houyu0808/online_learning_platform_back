@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigInteger;
+import java.util.List;
 
 @Repository
 public interface CourseRepository extends JpaRepository<Course,Integer> {
@@ -14,4 +15,5 @@ public interface CourseRepository extends JpaRepository<Course,Integer> {
     Course findByCourseCode(BigInteger courseCode);
     void deleteAllByAffiliatedCollegeCode(BigInteger code);
     void deleteAllByAffiliatedMajorCode(BigInteger code);
+    List<Course> findAllByAffiliatedMajorCode(BigInteger majorCode);
 }
