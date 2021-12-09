@@ -71,12 +71,12 @@ public class VideoServiceImpl implements VideoService {
     }
 
     @Override
-    public String saveVideo(MultipartFile[] file1,MultipartFile[] file2,VideoVO videoVO ) {
-        if (file1.length == 0 || file2.length == 0) {
+    public String saveVideo(MultipartFile file1,MultipartFile file2,VideoVO videoVO ) {
+        if (file1.isEmpty() || file2.isEmpty()) {
             return "上传失败，请选择文件";
         }
-        String fileName1 = file1[0].getOriginalFilename();
-        String fileName2 = file2[0].getOriginalFilename();
+        String fileName1 = file1.getOriginalFilename();
+        String fileName2 = file2.getOriginalFilename();
         String newName1 = UUID.randomUUID().toString() + fileName1.substring(fileName1.lastIndexOf("."), fileName1.length());
         String newName2 = UUID.randomUUID().toString() + fileName2.substring(fileName2.lastIndexOf("."), fileName2.length());
         File dest1 = new File(uploadFilePath + "/image/" + newName1);
@@ -93,8 +93,8 @@ public class VideoServiceImpl implements VideoService {
             BeanUtils.copyProperties(videoVO,video);
             try {
                 videoRepository.save(video);
-                file2[0].transferTo(dest2);
-                file1[0].transferTo(dest1);
+                file1.transferTo(dest1);
+                file2.transferTo(dest2);
                 return "更新成功";
             } catch (IOException e) {
                 return "更新失败";
@@ -108,8 +108,8 @@ public class VideoServiceImpl implements VideoService {
                 BeanUtils.copyProperties(videoVO,video);
                 try {
                     videoRepository.save(video);
-                    file2[0].transferTo(dest2);
-                    file1[0].transferTo(dest1);
+                    file1.transferTo(dest1);
+                    file2.transferTo(dest2);
                     return "创建成功";
                 } catch (IOException e) {
                     return "创建失败";
