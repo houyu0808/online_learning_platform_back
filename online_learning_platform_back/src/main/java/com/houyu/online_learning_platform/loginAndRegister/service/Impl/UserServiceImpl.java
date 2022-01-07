@@ -44,12 +44,12 @@ public class UserServiceImpl implements UserService {
                     jwt_token = GenerateToken.createToken(username,student.getId(),student.getIdentify());
                     httpServletResponse.addHeader("token",jwt_token);
                     httpServletResponse.setHeader("Access-Control-Expose-Headers","token");
-                    return "登陆成功";
+                    return student.getUsername();
                 }else{
-                    return "密码错误!请重新输入!";
+                    return "1";
                 }
             }else{
-                return "用户名不存在!请重新输入!";
+                return "2";
             }
         }else{
             Teacher teacher1 = teacherRepository.findByPhoneNumber(username);
@@ -65,12 +65,12 @@ public class UserServiceImpl implements UserService {
                     jwt_token = GenerateToken.createToken(username,teacher.getId(),teacher.getIdentify());
                     httpServletResponse.addHeader("token",jwt_token);
                     httpServletResponse.setHeader("Access-Control-Expose-Headers","token");
-                    return "登陆成功";
+                    return teacher.getUsername();
                 }else{
-                    return "密码错误!请重新输入!";
+                    return "1";
                 }
             }else{
-                return "用户名不存在!请重新输入!";
+                return "2";
             }
         }
     }

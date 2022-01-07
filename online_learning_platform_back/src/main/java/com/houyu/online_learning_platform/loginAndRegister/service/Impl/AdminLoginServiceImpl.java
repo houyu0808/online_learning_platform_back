@@ -27,12 +27,12 @@ public class AdminLoginServiceImpl implements AdminLoginService {
                 String jwt_token = GenerateToken.createToken(username,user.getId(),"管理员");
                 httpServletResponse.addHeader("token",jwt_token);
                 httpServletResponse.addHeader("Access-Control-Expose-Headers", "token");
-                return "登陆成功";
+                return "超级管理员";
             }else{
-                return "密码错误";
+                return "1";
             }
         }else{
-            return "用户名不存在!请重新输入！";
+            return "2";
         }
     }
 }

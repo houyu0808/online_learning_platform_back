@@ -8,6 +8,8 @@ import com.houyu.online_learning_platform.back_stage_manage.vo.TeacherVO;
 import com.houyu.online_learning_platform.loginAndRegister.dto.AdminDto;
 import com.houyu.online_learning_platform.loginAndRegister.service.AdminLoginService;
 import com.houyu.online_learning_platform.loginAndRegister.service.UserService;
+import com.houyu.online_learning_platform.utils.loginStatus.LoginDTO;
+import com.houyu.online_learning_platform.utils.loginStatus.LoginStatusUtils;
 import com.houyu.online_learning_platform.utils.responseMessage.ResponseMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -27,10 +29,11 @@ public class UserController {
     @PostMapping("/adminlogin")
     public ResponseMessage adminLogin(@RequestBody AdminDto admindto) {
         String result = adminLoginService.loginVerification(admindto.getUsername(), admindto.getPassword());
-        if (result.equals("登陆成功")) {
-            return ResponseMessage.ok(result);
-        } else {
-            return ResponseMessage.error(500, result);
+        LoginDTO loginDTO = LoginStatusUtils.loginResponse(result);
+        if(loginDTO.getCode() == 200 ){
+            return ResponseMessage.ok(loginDTO.getResult(),loginDTO.getMessage());
+        }else{
+            return ResponseMessage.error(loginDTO.getCode(),loginDTO.getMessage());
         }
     }
 
@@ -38,12 +41,12 @@ public class UserController {
     @PostMapping("/userlogin")
     public ResponseMessage userLogin(@RequestBody AdminDto admindto) {
         String result = userService.userLogin(admindto.getUsername(), admindto.getPassword(), admindto.getIdentify());
-        if (result.equals("登陆成功")) {
-            return ResponseMessage.ok(result);
-        } else {
-            return ResponseMessage.error(500, result);
+        LoginDTO loginDTO = LoginStatusUtils.loginResponse(result);
+        if(loginDTO.getCode() == 200 ){
+            return ResponseMessage.ok(loginDTO.getResult(),loginDTO.getMessage());
+        }else{
+            return ResponseMessage.error(loginDTO.getCode(),loginDTO.getMessage());
         }
-
     }
 
     //学生注册

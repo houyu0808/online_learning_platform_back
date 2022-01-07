@@ -1,7 +1,17 @@
 com\houyu\online_learning_platform\OnlineLearningPlatformApplication.class
+com\houyu\online_learning_platform\back_stage_manage\entity\Video.class
 com\houyu\online_learning_platform\loginAndRegister\controller\UserController.class
 com\houyu\online_learning_platform\loginAndRegister\service\Impl\AdminLoginServiceImpl.class
+com\houyu\online_learning_platform\back_stage_manage\controller\VideoController.class
 com\houyu\online_learning_platform\utils\responseMessage\ResponseMessage.class
+com\houyu\online_learning_platform\utils\cros\WebMvcConfig.class
+com\houyu\online_learning_platform\back_stage_manage\vo\VideoVO.class
+com\houyu\online_learning_platform\utils\cros\WebMvcConfig$1.class
+com\houyu\online_learning_platform\utils\cros\CorsFilterConfig.class
+com\houyu\online_learning_platform\back_stage_manage\service\impl\VideoServiceImpl.class
+com\houyu\online_learning_platform\loginAndRegister\dto\AdminDto.class
 com\houyu\online_learning_platform\utils\responseMessage\Response.class
 com\houyu\online_learning_platform\utils\token\GenerateToken.class
 com\houyu\online_learning_platform\utils\token\TokenUtils.class
+com\houyu\online_learning_platform\back_stage_manage\service\VideoService.class
+com\houyu\online_learning_platform\back_stage_manage\dao\VideoRepository.class

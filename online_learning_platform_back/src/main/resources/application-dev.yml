@@ -4,9 +4,9 @@ spring:
   profiles:
     active: dev
   datasource:
-    username: houyu1124
-    password: houyu07181
-    url: jdbc:mysql://localhost:3307/learning_platform?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8&useSSL=false
+    username: root
+    password: 123456
+    url: jdbc:mysql://localhost:3306/learning_platform?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8&useSSL=false
     driver-class-name: com.mysql.cj.jdbc.Driver
   devtools:
     restart:
