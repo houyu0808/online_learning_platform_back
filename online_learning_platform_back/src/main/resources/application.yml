@@ -70,7 +70,7 @@ oss:
   max_size: 52428800
   local:
     domain: 本地地址
-    upload-file-path: C:/Users/graduation_Project
+    upload-file-path: E:/graduation_Project
 # feign相关配置
 feign:
   # Feign org.springframework.data.domain.Page编码和解码

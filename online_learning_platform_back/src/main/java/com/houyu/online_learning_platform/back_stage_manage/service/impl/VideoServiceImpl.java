@@ -83,8 +83,8 @@ public class VideoServiceImpl implements VideoService {
         File dest2 = new File(uploadFilePath + "/video/" + newName2);
         if(videoVO.getId() != null){
             Video video = videoRepository.findByVideoCode(videoVO.getVideoCode());
-            String imageString = video.getImageUrl().replace(uploadFilePath,uploadPath);
-            String videoString = video.getVideoUrl().replace(uploadFilePath,uploadPath);
+            String imageString = video.getImageUrl().replace(uploadPath,uploadFilePath);
+            String videoString = video.getVideoUrl().replace(uploadPath,uploadFilePath);
             File existFile1 = new File(imageString);
             File existFile2 = new File(videoString);
             if(existFile1.exists()){existFile1.delete();}
