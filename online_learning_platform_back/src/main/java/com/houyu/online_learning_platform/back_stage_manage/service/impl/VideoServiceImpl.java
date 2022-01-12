@@ -23,9 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.rmi.ServerException;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 
 @Service
@@ -79,8 +77,8 @@ public class VideoServiceImpl implements VideoService {
         String fileName2 = file2.getOriginalFilename();
         String newName1 = UUID.randomUUID().toString() + fileName1.substring(fileName1.lastIndexOf("."), fileName1.length());
         String newName2 = UUID.randomUUID().toString() + fileName2.substring(fileName2.lastIndexOf("."), fileName2.length());
-        File dest1 = new File(uploadFilePath + "/image/" + newName1);
-        File dest2 = new File(uploadFilePath + "/video/" + newName2);
+        File dest1 = new File(uploadFilePath + "/images/" + newName1);
+        File dest2 = new File(uploadFilePath + "/videos/" + newName2);
         if(videoVO.getId() != null){
             Video video = videoRepository.findByVideoCode(videoVO.getVideoCode());
             String imageString = video.getImageUrl().replace(uploadPath,uploadFilePath);
@@ -90,6 +88,7 @@ public class VideoServiceImpl implements VideoService {
             if(existFile1.exists()){existFile1.delete();}
             if(existFile2.exists()){existFile2.delete();}
             copyVideo(videoVO,newName1,newName2);
+            videoVO.setCreatedTime(video.getCreatedTime());
             BeanUtils.copyProperties(videoVO,video);
             try {
                 videoRepository.save(video);
@@ -104,6 +103,8 @@ public class VideoServiceImpl implements VideoService {
                 return "该视频编码已存在请重新创建";
             }else{
                 copyVideo(videoVO,newName1,newName2);
+                Date date = new Date();
+                videoVO.setCreatedTime(date);
                 Video video = new Video();
                 BeanUtils.copyProperties(videoVO,video);
                 try {
@@ -121,8 +122,8 @@ public class VideoServiceImpl implements VideoService {
     }
     //复制视频信息
     public void copyVideo(VideoVO videoVO,String newName1,String newName2){
-        videoVO.setImageUrl(uploadPath +  "/image/" + newName1);
-        videoVO.setVideoUrl(uploadPath + "/video/" + newName2);
+        videoVO.setImageUrl(uploadPath +  "/images/" + newName1);
+        videoVO.setVideoUrl(uploadPath + "/videos/" + newName2);
         Course course = courseRepository.findByCourseCode(videoVO.getBelongCourseCode());
         Teacher teacher = teacherRepository.findByEmployeeNumber(videoVO.getBelongTeacherCode());
         videoVO.setBelongCourseName(course.getCourseName());
@@ -135,5 +136,10 @@ public class VideoServiceImpl implements VideoService {
         VideoVO videoVO = new VideoVO();
         BeanUtils.copyProperties(video,videoVO);
         return videoVO;
+    }
+
+    @Override
+    public List<Video> getVideoOrderByCreatedTime() {
+        return videoRepository.getAllByOrderByCreatedTimeDesc();
     }
 }

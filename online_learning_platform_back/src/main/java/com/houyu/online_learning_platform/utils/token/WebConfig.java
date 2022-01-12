@@ -18,8 +18,8 @@ public class WebConfig implements WebMvcConfigurer {
         //不需要拦截的路径
         String [] excludePathPatterns={
                 "/user/**",
-                "/image/**",
-                "/video/**"
+                "/images/**",
+                "/videos/**"
         };
         //注册一个登录拦截器
         registry.addInterceptor(new TokenUtils())

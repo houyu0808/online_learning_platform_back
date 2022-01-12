@@ -3,6 +3,7 @@ package com.houyu.online_learning_platform.back_stage_manage.vo;
 import lombok.Data;
 
 import java.math.BigInteger;
+import java.util.Date;
 
 @Data
 public class VideoVO {
@@ -23,4 +24,5 @@ public class VideoVO {
     private String belongTeacherCode;
     //所属教师名
     private String belongTeacherName;
+    private Date createdTime;
 }

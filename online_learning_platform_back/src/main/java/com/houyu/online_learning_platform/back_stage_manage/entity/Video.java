@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.math.BigInteger;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -32,4 +33,5 @@ public class Video {
     private String belongTeacherCode;
     //所属教师名
     private String belongTeacherName;
+    private Date createdTime;
 }
