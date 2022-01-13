@@ -34,4 +34,5 @@ public class Video {
     //所属教师名
     private String belongTeacherName;
     private Date createdTime;
+    private Integer clickTimes;
 }

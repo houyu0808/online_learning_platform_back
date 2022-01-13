@@ -19,4 +19,5 @@ public class TeacherVO {
     private String employeeNumber;
     //所属学院
     private BigInteger affiliatedCollegeCode;
+    private Integer clickTimes;
 }

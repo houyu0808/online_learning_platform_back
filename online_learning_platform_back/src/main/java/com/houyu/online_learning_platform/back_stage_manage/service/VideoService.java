@@ -16,5 +16,4 @@ public interface VideoService {
     String deleteVideo(Integer[] ids);
     String saveVideo(MultipartFile file1,MultipartFile file2,VideoVO videoVO);
     VideoVO getVideoById(Integer id);
-    List<Video> getVideoOrderByCreatedTime();
 }

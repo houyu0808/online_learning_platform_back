@@ -32,4 +32,5 @@ public class Teacher {
     private BigInteger affiliatedCollegeCode;
     //所属学院姓名
     private String affiliatedCollegeName;
+    private Integer clickTimes;
 }

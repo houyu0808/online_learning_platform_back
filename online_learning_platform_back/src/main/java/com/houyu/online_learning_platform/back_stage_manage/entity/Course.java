@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.persistence.criteria.CriteriaBuilder;
 import java.math.BigInteger;
 
 
@@ -29,4 +30,5 @@ public class Course {
     private String affiliatedCollegeName;
     private String teacher;
     private Integer status;
+    private Integer clickTimes;
 }

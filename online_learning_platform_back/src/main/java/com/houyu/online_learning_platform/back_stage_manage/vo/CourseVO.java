@@ -13,4 +13,5 @@ public class CourseVO {
     private BigInteger affiliatedCollegeCode;;
     private String teacher;
     private Integer status;
+    private Integer clickTimes;
 }

@@ -40,8 +40,4 @@ public class VideoController {
     public ResponseMessage getVideoById(@RequestParam Integer id){
         return ResponseMessage.ok(videoService.getVideoById(id));
     }
-    @GetMapping("/getcarousel")
-    public ResponseMessage getCarousel(){
-        return ResponseMessage.ok(videoService.getVideoOrderByCreatedTime());
-    }
 }

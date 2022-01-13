@@ -137,9 +137,4 @@ public class VideoServiceImpl implements VideoService {
         BeanUtils.copyProperties(video,videoVO);
         return videoVO;
     }
-
-    @Override
-    public List<Video> getVideoOrderByCreatedTime() {
-        return videoRepository.getAllByOrderByCreatedTimeDesc();
-    }
 }
