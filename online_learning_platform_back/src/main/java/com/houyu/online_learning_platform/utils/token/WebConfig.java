@@ -19,7 +19,8 @@ public class WebConfig implements WebMvcConfigurer {
         String [] excludePathPatterns={
                 "/user/**",
                 "/images/**",
-                "/videos/**"
+                "/videos/**",
+                "/common/**"
         };
         //注册一个登录拦截器
         registry.addInterceptor(new TokenUtils())

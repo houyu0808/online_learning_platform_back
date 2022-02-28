@@ -4,9 +4,9 @@ spring:
 #  profiles:
 #    active: dev
   datasource:
-    username: root
+    username: houyu
     password: 123456
-    url: jdbc:mysql://localhost:3306/learning_platform?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8&useSSL=false
+    url: jdbc:mysql://localhost:3306/newschema?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8&useSSL=false&allowPublicKeyRetrieval=true
     driver-class-name: com.mysql.cj.jdbc.Driver
   devtools:
     restart:
@@ -32,18 +32,18 @@ spring:
     validate-on-migrate: true
     # 当迁移发现数据库非空且存在没有元数据的表时，自动执行基准迁移，新建schema_version表
     baseline-on-migrate: true
-  redis:
-    host: 127.0.0.1
-    port: 6379
-    password: houyu07181
-    jedis:
-      pool:
-        max-active: 8
-        max-wait: -1
-        max-idle: 500
-        min-idle: 0
-    lettuce:
-      shutdown-timeout: 0
+#  redis:
+#    host: 127.0.0.1
+#    port: 6379
+#    password: houyu07181
+#    jedis:
+#      pool:
+#        max-active: 8
+#        max-wait: -1
+#        max-idle: 500
+#        min-idle: 0
+#    lettuce:
+#      shutdown-timeout: 0
   servlet:
     multipart:
       enabled: true
@@ -70,7 +70,7 @@ oss:
   max_size: 52428800
   local:
     domain: 本地地址
-    upload-file-path: C:/Users/graduation_Project
+    upload-file-path: E:/graduation_Project
 # feign相关配置
 feign:
   # Feign org.springframework.data.domain.Page编码和解码

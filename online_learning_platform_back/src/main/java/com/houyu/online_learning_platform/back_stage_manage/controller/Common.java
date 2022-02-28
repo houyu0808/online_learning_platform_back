@@ -3,10 +3,9 @@ package com.houyu.online_learning_platform.back_stage_manage.controller;
 import com.houyu.online_learning_platform.back_stage_manage.service.CommonService;
 import com.houyu.online_learning_platform.utils.responseMessage.ResponseMessage;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.math.BigInteger;
 
 @RestController
 @RequestMapping("/common")
@@ -23,8 +22,27 @@ public class Common {
     public ResponseMessage getCarousel(){
         return ResponseMessage.ok(commonService.getCarousel());
     }
+
     @GetMapping("/getextensionlist")
-    public  ResponseMessage getExtensionList(){
+    public ResponseMessage getExtensionList(){
         return  ResponseMessage.ok(commonService.getExtensionList());
+    }
+
+    @GetMapping("/getstudentinformation")
+    public ResponseMessage getStudentInformation(@RequestParam String username){
+        return ResponseMessage.ok(commonService.getStudentInformation(username));
+    }
+
+    @GetMapping("/getteacherinformation")
+    public ResponseMessage getTeacherInformation(@RequestParam String username){
+        return ResponseMessage.ok(commonService.getTeacherInformation(username));
+    }
+    @GetMapping("/getstudenthotlist")
+    public ResponseMessage getStudentHotList(@RequestParam BigInteger majorCode){
+        return ResponseMessage.ok(commonService.getStudentHotList(majorCode));
+    }
+    @GetMapping("/getteacherhotlist")
+    public ResponseMessage getTeacherHotList(@RequestParam BigInteger collegeCode){
+        return ResponseMessage.ok(commonService.getTeacherHotList(collegeCode));
     }
 }

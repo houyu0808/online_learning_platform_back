@@ -16,4 +16,5 @@ public interface CourseRepository extends JpaRepository<Course,Integer> {
     void deleteAllByAffiliatedCollegeCode(BigInteger code);
     void deleteAllByAffiliatedMajorCode(BigInteger code);
     List<Course> findAllByAffiliatedMajorCode(BigInteger majorCode);
+    List<Course> findAllByAffiliatedCollegeCode(BigInteger collegeCode);
 }

@@ -1,9 +1,11 @@
 package com.houyu.online_learning_platform.back_stage_manage.service.impl;
 
 import com.houyu.online_learning_platform.back_stage_manage.dao.CourseRepository;
+import com.houyu.online_learning_platform.back_stage_manage.dao.StudentRepository;
 import com.houyu.online_learning_platform.back_stage_manage.dao.TeacherRepository;
 import com.houyu.online_learning_platform.back_stage_manage.dao.VideoRepository;
 import com.houyu.online_learning_platform.back_stage_manage.entity.Course;
+import com.houyu.online_learning_platform.back_stage_manage.entity.Student;
 import com.houyu.online_learning_platform.back_stage_manage.entity.Teacher;
 import com.houyu.online_learning_platform.back_stage_manage.entity.Video;
 import com.houyu.online_learning_platform.back_stage_manage.service.CommonService;
@@ -11,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -22,6 +26,8 @@ public class CommonServiceImpl implements CommonService {
     private TeacherRepository teacherRepository;
     @Autowired
     private CourseRepository courseRepository;
+    @Autowired
+    private StudentRepository studentRepository;
 
     @Override
     public void addClickTimes(Integer id) {
@@ -52,12 +58,48 @@ public class CommonServiceImpl implements CommonService {
     }
 
     @Override
-    public List<Video> getExtensionList() {
+        public List<Video> getExtensionList() {
         return videoRepository.getAllByOrderByCreatedTimeDesc();
     }
 
     @Override
     public List<Video> getCarousel() {
         return videoRepository.getAllByClickTimes();
+    }
+
+    @Override
+    public Student getStudentInformation(String username) {
+        return studentRepository.findByUsername(username);
+    }
+
+    @Override
+    public Teacher getTeacherInformation(String username) {
+        return teacherRepository.findByUsername(username);
+    }
+
+    @Override
+    public List<Video> getStudentHotList(BigInteger majorCode) {
+        List<Course> courseList = courseRepository.findAllByAffiliatedMajorCode(majorCode);
+        List<Video> videos = new ArrayList<>();
+        for (Course course: courseList){
+            List<Video> videoList = videoRepository.findAllByBelongCourseCode(course.getCourseCode());
+            for(Video video:videoList){
+                videos.add(video);
+            }
+        }
+        return videos;
+    }
+
+    @Override
+    public List<Video> getTeacherHotList(BigInteger collegeCode) {
+        List<Course> courseList = courseRepository.findAllByAffiliatedCollegeCode(collegeCode);
+        List<Video> videos = new ArrayList<>();
+        for (Course course: courseList){
+            List<Video> videoList = videoRepository.findAllByBelongCourseCode(course.getCourseCode());
+            for(Video video:videoList){
+                videos.add(video);
+            }
+        }
+        return videos;
     }
 }
