@@ -102,4 +102,18 @@ public class CommonServiceImpl implements CommonService {
         }
         return videos;
     }
+
+    @Override
+    public List<Video> getRecommendTeacher() {
+        List<Teacher> teacherList = teacherRepository.findAllOrderByClickTimes();
+        List<Video> videos = new ArrayList<>();
+        for(Teacher teacher:teacherList){
+            List<Video> videoList = videoRepository.findAllByBelongTeacherCodeOrderByClickTimes(teacher.getEmployeeNumber());
+            for(Video video:videoList){
+                videos.add(video);
+                break;
+            }
+        }
+        return videos;
+    }
 }

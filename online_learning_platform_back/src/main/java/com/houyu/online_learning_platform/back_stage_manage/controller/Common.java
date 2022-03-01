@@ -45,4 +45,8 @@ public class Common {
     public ResponseMessage getTeacherHotList(@RequestParam BigInteger collegeCode){
         return ResponseMessage.ok(commonService.getTeacherHotList(collegeCode));
     }
+    @GetMapping("/getrecommendteacher")
+    public ResponseMessage getRecommendTeacher(){
+        return ResponseMessage.ok(commonService.getRecommendTeacher());
+    }
 }

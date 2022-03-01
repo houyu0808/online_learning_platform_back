@@ -17,5 +17,5 @@ public interface CommonService {
     Teacher getTeacherInformation(String username);
     List<Video> getStudentHotList(BigInteger majorCode);
     List<Video> getTeacherHotList(BigInteger collegeCode);
-
+    List<Video> getRecommendTeacher();
 }

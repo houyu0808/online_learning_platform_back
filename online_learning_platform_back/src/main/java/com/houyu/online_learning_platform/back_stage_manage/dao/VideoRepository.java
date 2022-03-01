@@ -28,4 +28,6 @@ public interface VideoRepository extends JpaRepository<Video,Integer> {
 
      List<Video> findAllByBelongCourseCode(BigInteger courseCode);
 
+     List<Video> findAllByBelongTeacherCode(String teacherCode);
+     List<Video> findAllByBelongTeacherCodeOrderByClickTimes(String teacherCode);
 }
