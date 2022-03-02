@@ -116,4 +116,14 @@ public class CommonServiceImpl implements CommonService {
         }
         return videos;
     }
+
+    @Override
+    public Video getVideoInfo(Integer id) {
+        return videoRepository.findById(id).get();
+    }
+
+    @Override
+    public List<Video> getVideoList(String teacherCode) {
+        return videoRepository.findAllByBelongTeacherCode(teacherCode);
+    }
 }

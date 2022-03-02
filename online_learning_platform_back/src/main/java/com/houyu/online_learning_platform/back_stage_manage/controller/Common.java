@@ -49,4 +49,14 @@ public class Common {
     public ResponseMessage getRecommendTeacher(){
         return ResponseMessage.ok(commonService.getRecommendTeacher());
     }
+
+    @GetMapping("/getvideoinfo")
+    public ResponseMessage getVideoInfo(@RequestParam Integer id){
+        return ResponseMessage.ok(commonService.getVideoInfo(id));
+    }
+
+    @GetMapping("/getvideolist")
+    public  ResponseMessage getVideoList(@RequestParam String teacherCode){
+        return ResponseMessage.ok(commonService.getVideoList(teacherCode));
+    }
 }

@@ -18,4 +18,6 @@ public interface CommonService {
     List<Video> getStudentHotList(BigInteger majorCode);
     List<Video> getTeacherHotList(BigInteger collegeCode);
     List<Video> getRecommendTeacher();
+    Video getVideoInfo(Integer id);
+    List<Video> getVideoList(String teacherCode);
 }
