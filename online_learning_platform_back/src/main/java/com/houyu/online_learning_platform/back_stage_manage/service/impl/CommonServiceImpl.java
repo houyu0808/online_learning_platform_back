@@ -126,4 +126,9 @@ public class CommonServiceImpl implements CommonService {
     public List<Video> getVideoList(String teacherCode) {
         return videoRepository.findAllByBelongTeacherCode(teacherCode);
     }
+
+    @Override
+    public Teacher getTeacherInfo(String teacherCode) {
+        return teacherRepository.findByEmployeeNumber(teacherCode);
+    }
 }

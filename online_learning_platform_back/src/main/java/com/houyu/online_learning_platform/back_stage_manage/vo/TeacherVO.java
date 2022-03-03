@@ -20,4 +20,5 @@ public class TeacherVO {
     //所属学院
     private BigInteger affiliatedCollegeCode;
     private Integer clickTimes;
+    private String autograph;
 }

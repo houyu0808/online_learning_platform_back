@@ -20,4 +20,5 @@ public interface CommonService {
     List<Video> getRecommendTeacher();
     Video getVideoInfo(Integer id);
     List<Video> getVideoList(String teacherCode);
+    Teacher getTeacherInfo(String teacherCode);
 }

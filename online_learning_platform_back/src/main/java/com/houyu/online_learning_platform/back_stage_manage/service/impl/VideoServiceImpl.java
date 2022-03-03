@@ -89,7 +89,11 @@ public class VideoServiceImpl implements VideoService {
             if(existFile2.exists()){existFile2.delete();}
             copyVideo(videoVO,newName1,newName2);
             videoVO.setCreatedTime(video.getCreatedTime());
+            videoVO.setClickTimes(video.getClickTimes());
             BeanUtils.copyProperties(videoVO,video);
+            if(video.getVideoIntroduce() == null){
+                video.setVideoIntroduce("-");
+            }
             try {
                 videoRepository.save(video);
                 file1.transferTo(dest1);
@@ -107,6 +111,8 @@ public class VideoServiceImpl implements VideoService {
                 videoVO.setCreatedTime(date);
                 Video video = new Video();
                 BeanUtils.copyProperties(videoVO,video);
+                video.setClickTimes(0);
+                video.setVideoIntroduce("-");
                 try {
                     videoRepository.save(video);
                     file1.transferTo(dest1);

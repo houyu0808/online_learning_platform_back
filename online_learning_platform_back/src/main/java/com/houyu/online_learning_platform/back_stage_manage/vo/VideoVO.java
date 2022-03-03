@@ -26,4 +26,5 @@ public class VideoVO {
     private String belongTeacherName;
     private Date createdTime;
     private Integer clickTimes;
+    private String videoIntroduce;
 }

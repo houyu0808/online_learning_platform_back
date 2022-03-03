@@ -43,6 +43,7 @@ public class TeacherServiceImpl implements TeacherService {
                 teacherVO.setPassword(teacher.getPassword());
                 teacherVO.setPhoneNumber(teacher.getPhoneNumber());
                 BeanUtils.copyProperties(teacherVO, teacher);
+                teacher.setAutograph(teacher2.getAutograph());
                 teacherRepository.save(teacher);
                 return "更新成功";
             }else{
@@ -58,6 +59,7 @@ public class TeacherServiceImpl implements TeacherService {
                 teacher.setEmployeeNumber(teacherVO.getEmployeeNumber());
                 teacher.setAffiliatedCollegeCode(teacherVO.getAffiliatedCollegeCode());
                 teacher.setAffiliatedCollegeName(collegeRepository.findByCollegeCode(teacherVO.getAffiliatedCollegeCode()).getCollegeName());
+                teacher.setAutograph("这个人很懒,什么都没留下");
                 teacherRepository.save(teacher);
                 return "创建成功";
             } else {

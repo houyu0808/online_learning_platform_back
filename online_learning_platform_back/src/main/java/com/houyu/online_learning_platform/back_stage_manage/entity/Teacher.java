@@ -33,4 +33,5 @@ public class Teacher {
     //所属学院姓名
     private String affiliatedCollegeName;
     private Integer clickTimes;
+    private String autograph;
 }

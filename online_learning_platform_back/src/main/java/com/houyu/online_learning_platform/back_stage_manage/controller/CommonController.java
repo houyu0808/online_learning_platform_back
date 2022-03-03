@@ -9,7 +9,7 @@ import java.math.BigInteger;
 
 @RestController
 @RequestMapping("/common")
-public class Common {
+public class CommonController {
     @Autowired
     private CommonService commonService;
 
@@ -58,5 +58,10 @@ public class Common {
     @GetMapping("/getvideolist")
     public  ResponseMessage getVideoList(@RequestParam String teacherCode){
         return ResponseMessage.ok(commonService.getVideoList(teacherCode));
+    }
+
+    @GetMapping("/getteacherinfo")
+    public ResponseMessage getTeacherInfo(@RequestParam String teacherCode){
+        return ResponseMessage.ok(commonService.getTeacherInfo(teacherCode));
     }
 }
