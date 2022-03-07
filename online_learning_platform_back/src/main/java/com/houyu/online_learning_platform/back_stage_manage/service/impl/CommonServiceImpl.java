@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -130,5 +131,11 @@ public class CommonServiceImpl implements CommonService {
     @Override
     public Teacher getTeacherInfo(String teacherCode) {
         return teacherRepository.findByEmployeeNumber(teacherCode);
+    }
+
+    @Override
+    public List<Video> getTodayRecommend() {
+        Date date = new Date();
+        return videoRepository.getTodayRecommend(date);
     }
 }

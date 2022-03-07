@@ -64,4 +64,8 @@ public class CommonController {
     public ResponseMessage getTeacherInfo(@RequestParam String teacherCode){
         return ResponseMessage.ok(commonService.getTeacherInfo(teacherCode));
     }
+    @GetMapping("/gettodayrecommend")
+    public ResponseMessage getTodayRecommend(){
+        return ResponseMessage.ok(commonService.getTodayRecommend());
+    }
 }

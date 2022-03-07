@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigInteger;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,4 +31,7 @@ public interface VideoRepository extends JpaRepository<Video,Integer> {
 
      List<Video> findAllByBelongTeacherCode(String teacherCode);
      List<Video> findAllByBelongTeacherCodeOrderByClickTimes(String teacherCode);
+
+     @Query(nativeQuery = true,value = "select * from video_info where created_time = ?1 order by click_times DESC limit 5")
+     List<Video> getTodayRecommend(Date time);
 }
