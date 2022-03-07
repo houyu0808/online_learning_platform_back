@@ -1,7 +1,7 @@
-package com.houyu.online_learning_platform.back_stage_manage.dao;
+package com.houyu.online_learning_platform.functions.dao;
 
-import com.houyu.online_learning_platform.back_stage_manage.entity.Comment;
-import com.houyu.online_learning_platform.back_stage_manage.vo.CommentVO;
+import com.houyu.online_learning_platform.functions.entity.Comment;
+import com.houyu.online_learning_platform.functions.vo.CommentVO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

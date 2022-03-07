@@ -1,12 +1,12 @@
-package com.houyu.online_learning_platform.back_stage_manage.service.impl;
+package com.houyu.online_learning_platform.functions.service.impl;
 
-import com.houyu.online_learning_platform.back_stage_manage.dao.Comment2Repository;
-import com.houyu.online_learning_platform.back_stage_manage.dao.CommentRepository;
-import com.houyu.online_learning_platform.back_stage_manage.entity.Comment;
-import com.houyu.online_learning_platform.back_stage_manage.entity.Comment2;
-import com.houyu.online_learning_platform.back_stage_manage.service.CommentService;
-import com.houyu.online_learning_platform.back_stage_manage.vo.Comment2VO;
-import com.houyu.online_learning_platform.back_stage_manage.vo.CommentVO;
+import com.houyu.online_learning_platform.functions.dao.Comment2Repository;
+import com.houyu.online_learning_platform.functions.dao.CommentRepository;
+import com.houyu.online_learning_platform.functions.entity.Comment;
+import com.houyu.online_learning_platform.functions.entity.Comment2;
+import com.houyu.online_learning_platform.functions.service.CommentService;
+import com.houyu.online_learning_platform.functions.vo.Comment2VO;
+import com.houyu.online_learning_platform.functions.vo.CommentVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,7 +1,7 @@
-package com.houyu.online_learning_platform.back_stage_manage.service;
+package com.houyu.online_learning_platform.functions.service;
 
-import com.houyu.online_learning_platform.back_stage_manage.vo.Comment2VO;
-import com.houyu.online_learning_platform.back_stage_manage.vo.CommentVO;
+import com.houyu.online_learning_platform.functions.vo.Comment2VO;
+import com.houyu.online_learning_platform.functions.vo.CommentVO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

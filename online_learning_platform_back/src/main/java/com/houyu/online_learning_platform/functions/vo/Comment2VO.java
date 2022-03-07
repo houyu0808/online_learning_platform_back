@@ -1,21 +1,12 @@
-package com.houyu.online_learning_platform.back_stage_manage.entity;
+package com.houyu.online_learning_platform.functions.vo;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-import javax.persistence.*;
 import java.math.BigInteger;
 import java.util.Date;
 
-@Getter
-@Setter
-@Table(name = "comment_list2")
-@Entity
-public class Comment2 {
-    @Id
-    @GeneratedValue(
-            strategy = GenerationType.IDENTITY
-    )
+@Data
+public class Comment2VO {
     private Integer id;
     private String commentText;
     private Integer fabulous;

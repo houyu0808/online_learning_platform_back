@@ -1,4 +1,4 @@
-package com.houyu.online_learning_platform.back_stage_manage.service.impl;
+package com.houyu.online_learning_platform.functions.service.impl;
 
 import com.houyu.online_learning_platform.back_stage_manage.dao.CourseRepository;
 import com.houyu.online_learning_platform.back_stage_manage.dao.StudentRepository;
@@ -8,7 +8,7 @@ import com.houyu.online_learning_platform.back_stage_manage.entity.Course;
 import com.houyu.online_learning_platform.back_stage_manage.entity.Student;
 import com.houyu.online_learning_platform.back_stage_manage.entity.Teacher;
 import com.houyu.online_learning_platform.back_stage_manage.entity.Video;
-import com.houyu.online_learning_platform.back_stage_manage.service.CommonService;
+import com.houyu.online_learning_platform.functions.service.CommonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package com.houyu.online_learning_platform.back_stage_manage.service;
+package com.houyu.online_learning_platform.functions.service;
 
 import com.houyu.online_learning_platform.back_stage_manage.entity.Student;
 import com.houyu.online_learning_platform.back_stage_manage.entity.Teacher;

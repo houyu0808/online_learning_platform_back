@@ -1,4 +1,4 @@
-package com.houyu.online_learning_platform.back_stage_manage.entity;
+package com.houyu.online_learning_platform.functions.entity;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -9,19 +9,19 @@ import java.util.Date;
 
 @Getter
 @Setter
-@Table(name = "comment_list")
+@Table(name = "comment_list2")
 @Entity
-public class Comment {
+public class Comment2 {
     @Id
     @GeneratedValue(
             strategy = GenerationType.IDENTITY
     )
     private Integer id;
     private String commentText;
-    private Integer belongVideoId;
     private Integer fabulous;
     private Integer step;
     private Date createdTime;
+    private Integer belongCommentId;
     private String commentUserCode;
     private String commentUsername;
 }

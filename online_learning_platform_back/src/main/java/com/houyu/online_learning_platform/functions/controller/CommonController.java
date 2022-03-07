@@ -1,6 +1,6 @@
-package com.houyu.online_learning_platform.back_stage_manage.controller;
+package com.houyu.online_learning_platform.functions.controller;
 
-import com.houyu.online_learning_platform.back_stage_manage.service.CommonService;
+import com.houyu.online_learning_platform.functions.service.CommonService;
 import com.houyu.online_learning_platform.utils.responseMessage.ResponseMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

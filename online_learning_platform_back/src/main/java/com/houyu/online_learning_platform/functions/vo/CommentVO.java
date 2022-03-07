@@ -1,8 +1,7 @@
-package com.houyu.online_learning_platform.back_stage_manage.vo;
+package com.houyu.online_learning_platform.functions.vo;
 
 import lombok.Data;
 
-import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 

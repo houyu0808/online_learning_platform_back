@@ -1,9 +1,9 @@
-package com.houyu.online_learning_platform.back_stage_manage.controller;
+package com.houyu.online_learning_platform.functions.controller;
 
 
-import com.houyu.online_learning_platform.back_stage_manage.service.CommentService;
-import com.houyu.online_learning_platform.back_stage_manage.vo.Comment2VO;
-import com.houyu.online_learning_platform.back_stage_manage.vo.CommentVO;
+import com.houyu.online_learning_platform.functions.service.CommentService;
+import com.houyu.online_learning_platform.functions.vo.Comment2VO;
+import com.houyu.online_learning_platform.functions.vo.CommentVO;
 import com.houyu.online_learning_platform.utils.responseMessage.ResponseMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
