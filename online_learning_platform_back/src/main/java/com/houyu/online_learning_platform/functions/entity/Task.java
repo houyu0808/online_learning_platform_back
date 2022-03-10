@@ -20,6 +20,7 @@ public class Task {
     private String name;
     private String fileUrl;
     private BigInteger belongClassCode;
+    private String belongClassName;
     private String publisherCode;
     private String startTime;
     private String endTime;

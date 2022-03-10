@@ -16,4 +16,5 @@ public interface ClassService {
     String deleteClass(Integer[] ids);
     ClassVO getClassById(Integer id);
     List<Class> getClassByMajor(BigInteger majorCode);
+    List<Class> getClassByCollege(BigInteger collegeCode);
 }

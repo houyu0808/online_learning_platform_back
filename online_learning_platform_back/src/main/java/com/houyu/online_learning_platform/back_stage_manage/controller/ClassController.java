@@ -41,4 +41,8 @@ public class ClassController {
     public ResponseMessage getClassByMajor(@RequestParam BigInteger majorCode){
         return ResponseMessage.ok(classService.getClassByMajor(majorCode));
     }
+    @GetMapping("/getclassbycollege")
+    public ResponseMessage getClassList(@RequestParam BigInteger collegeCode){
+        return ResponseMessage.ok(classService.getClassByCollege(collegeCode));
+    }
 }

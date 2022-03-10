@@ -1,5 +1,7 @@
 package com.houyu.online_learning_platform.functions.service.impl;
 
+import com.houyu.online_learning_platform.back_stage_manage.dao.ClassRepository;
+import com.houyu.online_learning_platform.back_stage_manage.entity.Class;
 import com.houyu.online_learning_platform.functions.dao.TaskRepository;
 import com.houyu.online_learning_platform.functions.entity.Task;
 import com.houyu.online_learning_platform.functions.service.TaskService;
@@ -7,6 +9,8 @@ import com.houyu.online_learning_platform.functions.vo.TaskVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -25,6 +29,8 @@ public class TaskServiceImpl implements TaskService {
 
     @Autowired
     private TaskRepository taskRepository;
+    @Autowired
+    private ClassRepository classRepository;
 
     @Override
     public void addTask(MultipartFile file, TaskVO taskVO) {
@@ -33,6 +39,8 @@ public class TaskServiceImpl implements TaskService {
         File dest = new File(uploadFilePath + "/taskFile/" + newName);
         taskVO.setFileUrl(uploadPath + "/taskFile/" + newName);
         Task task = new Task();
+        Class classx = classRepository.findByClassCode(taskVO.getBelongClassCode());
+        taskVO.setBelongClassName(classx.getClassName());
         BeanUtils.copyProperties(taskVO,task);
         try{
             file.transferTo(dest);
@@ -55,4 +63,11 @@ public class TaskServiceImpl implements TaskService {
             throw new Error("源文件不存在");
         }
     }
+
+    @Override
+    public Page<Task> getTeacherTaskPage(String teacherCode, Pageable pageable) {
+        return taskRepository.findByPublisherCode(teacherCode,pageable);
+    }
+
+
 }

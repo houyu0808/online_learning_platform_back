@@ -101,4 +101,9 @@ public class ClassServiceImpl implements ClassService {
     public List<Class> getClassByMajor(BigInteger majorCode) {
         return classRepository.getAllByAffiliatedMajorCode(majorCode);
     }
+
+    @Override
+    public List<Class> getClassByCollege(BigInteger collegeCode) {
+        return classRepository.getAllByAffiliatedCollegeCode(collegeCode);
+    }
 }
