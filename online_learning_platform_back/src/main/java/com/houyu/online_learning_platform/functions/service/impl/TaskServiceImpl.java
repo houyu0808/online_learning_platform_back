@@ -1,7 +1,9 @@
 package com.houyu.online_learning_platform.functions.service.impl;
 
 import com.houyu.online_learning_platform.back_stage_manage.dao.ClassRepository;
+import com.houyu.online_learning_platform.back_stage_manage.dao.StudentRepository;
 import com.houyu.online_learning_platform.back_stage_manage.entity.Class;
+import com.houyu.online_learning_platform.back_stage_manage.entity.Student;
 import com.houyu.online_learning_platform.functions.dao.TaskRepository;
 import com.houyu.online_learning_platform.functions.entity.Task;
 import com.houyu.online_learning_platform.functions.service.TaskService;
@@ -17,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.transaction.Transactional;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -31,6 +34,8 @@ public class TaskServiceImpl implements TaskService {
     private TaskRepository taskRepository;
     @Autowired
     private ClassRepository classRepository;
+    @Autowired
+    private StudentRepository studentRepository;
 
     @Override
     public void addTask(MultipartFile file, TaskVO taskVO) {
@@ -41,6 +46,7 @@ public class TaskServiceImpl implements TaskService {
         Task task = new Task();
         Class classx = classRepository.findByClassCode(taskVO.getBelongClassCode());
         taskVO.setBelongClassName(classx.getClassName());
+        List<Student> studentList = studentRepository.findByAffiliatedClassCode(taskVO.getBelongClassCode());
         BeanUtils.copyProperties(taskVO,task);
         try{
             file.transferTo(dest);

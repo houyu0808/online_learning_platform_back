@@ -15,4 +15,5 @@ public interface StudentRepository extends JpaRepository<Student,Integer> {
     void deleteAllByAffiliatedCollegeCode(BigInteger code);
     void deleteAllByAffiliatedMajorCode(BigInteger code);
     void deleteAllByAffiliatedClassCode(BigInteger code);
+    List<Student> findByAffiliatedClassCode(BigInteger classCode);
 }
