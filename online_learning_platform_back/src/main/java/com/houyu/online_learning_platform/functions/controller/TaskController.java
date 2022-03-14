@@ -8,6 +8,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.math.BigInteger;
+
 @RestController
 @RequestMapping("/task")
 public class TaskController {
@@ -28,5 +30,18 @@ public class TaskController {
     @GetMapping("/gettaskpage")
     public ResponseMessage getTaskPage(@RequestParam String teacherCode, Pageable pageable){
         return ResponseMessage.ok(taskService.getTeacherTaskPage(teacherCode,pageable));
+    }
+    @GetMapping("/gettaskclasspage")
+    public ResponseMessage getTaskClassPage(@RequestParam Integer taskId, Pageable pageable){
+        return ResponseMessage.ok(taskService.getTaskClassPage(taskId,pageable));
+    }
+    @GetMapping("/getstudenttasklist")
+    public ResponseMessage getStudentTaskList(@RequestParam BigInteger classCode, Pageable pageable){
+        return ResponseMessage.ok(taskService.getStudentTask(classCode,pageable));
+    }
+    @PostMapping("/uploadfile")
+    public ResponseMessage uploadFile(@RequestParam("file") MultipartFile file,String stuNumber,Integer taskId,String uploadTime){
+        taskService.uploadFile(file,stuNumber,taskId,uploadTime);
+        return ResponseMessage.ok(200,"任务上传完成！");
     }
 }

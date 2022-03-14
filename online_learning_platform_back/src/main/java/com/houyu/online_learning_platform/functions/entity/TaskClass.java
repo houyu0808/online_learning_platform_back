@@ -6,6 +6,7 @@ import lombok.Setter;
 import org.omg.CORBA.PRIVATE_MEMBER;
 
 import javax.persistence.*;
+import java.math.BigInteger;
 
 @Getter
 @Setter
@@ -20,8 +21,9 @@ public class TaskClass {
     private Integer belongTaskId;
     private String stuNumber;
     private String stuName;
-    private String belongClassCode;
-    private String file_url;
-    private String upload_time;
-    private Integer status;
+    private BigInteger belongClassCode;
+    private String belongClassName;
+    private String fileUrl;
+    private String uploadTime;
+    private String status;
 }
