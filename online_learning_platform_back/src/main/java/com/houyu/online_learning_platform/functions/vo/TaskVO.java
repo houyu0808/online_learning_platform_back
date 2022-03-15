@@ -13,6 +13,7 @@ public class TaskVO {
     private BigInteger belongClassCode;
     private String belongClassName;
     private String publisherCode;
+    private String publisherName;
     private String startTime;
     private String endTime;
     private String comment;

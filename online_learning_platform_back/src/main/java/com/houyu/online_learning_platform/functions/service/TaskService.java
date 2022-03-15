@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
 import java.math.BigInteger;
 
 
@@ -19,4 +20,5 @@ public interface TaskService {
     Page<TaskClass> getTaskClassPage(Integer taskId,Pageable pageable);
     Page<Task> getStudentTask(BigInteger classCode, Pageable pageable);
     void uploadFile(MultipartFile file,String stuNumber,Integer taskId,String uploadTime);
+    void downloadFile(Integer id, HttpServletResponse response);
 }

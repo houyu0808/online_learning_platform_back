@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
 import java.math.BigInteger;
 
 @RestController
@@ -43,5 +44,10 @@ public class TaskController {
     public ResponseMessage uploadFile(@RequestParam("file") MultipartFile file,String stuNumber,Integer taskId,String uploadTime){
         taskService.uploadFile(file,stuNumber,taskId,uploadTime);
         return ResponseMessage.ok(200,"任务上传完成！");
+    }
+    @GetMapping("/downloadfile")
+    public ResponseMessage downloadFile(Integer id, HttpServletResponse response){
+        taskService.downloadFile(id,response);
+        return ResponseMessage.ok(200,"下载完成");
     }
 }

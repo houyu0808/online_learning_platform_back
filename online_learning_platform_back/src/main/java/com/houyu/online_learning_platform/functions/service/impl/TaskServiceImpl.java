@@ -18,10 +18,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.math.BigInteger;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -116,6 +117,41 @@ public class TaskServiceImpl implements TaskService {
             taskClassRepository.save(taskClass);
         }catch (IOException e){
             throw new Error("文件存储出错！请联系管理员！");
+        }
+    }
+
+    @Override
+    public void downloadFile(Integer id, HttpServletResponse response) {
+        Task task = taskRepository.findById(id).get();
+        String path = task.getFileUrl().replace(uploadPath,uploadFilePath);
+        File file = new File(path);
+        // 获取文件名
+        String filename = file.getName();
+        // 获取文件后缀名
+        String ext = filename.substring(filename.lastIndexOf(".") + 1).toLowerCase();
+        try{
+            FileInputStream fileInputStream = new FileInputStream(file);
+            InputStream fis = new BufferedInputStream(fileInputStream);
+            byte[] buffer = new byte[fis.available()];
+            fis.read(buffer);
+            fis.close();
+            response.reset();
+            // 设置response的Header
+            response.setCharacterEncoding("UTF-8");
+            //Content-Disposition的作用：告知浏览器以何种方式显示响应返回的文件，用浏览器打开还是以附件的形式下载到本地保存
+            //attachment表示以附件方式下载   inline表示在线打开   "Content-Disposition: inline; filename=文件名.mp3"
+            // filename表示文件的默认名称，因为网络传输只支持URL编码的相关支付，因此需要将文件名URL编码后进行传输,前端收到后需要反编码才能获取到真正的名称
+            response.addHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(filename, "UTF-8"));
+            // 告知浏览器文件的大小
+            response.addHeader("Access-Control-Allow-Origin", "*");
+            response.addHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+            response.addHeader("Content-Length", "" + file.length());
+            OutputStream outputStream = new BufferedOutputStream(response.getOutputStream());
+            response.setContentType("application/octet-stream");
+            outputStream.write(buffer);
+            outputStream.flush();
+        }catch (Exception e){
+            throw new Error(e);
         }
     }
 
