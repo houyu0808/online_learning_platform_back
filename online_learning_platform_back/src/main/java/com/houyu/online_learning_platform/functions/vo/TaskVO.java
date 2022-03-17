@@ -1,9 +1,11 @@
 package com.houyu.online_learning_platform.functions.vo;
 
+import com.houyu.online_learning_platform.functions.entity.TaskClass;
 import lombok.Data;
 
 import java.math.BigInteger;
 import java.util.Date;
+import java.util.List;
 
 @Data
 public class TaskVO {
@@ -17,4 +19,5 @@ public class TaskVO {
     private String startTime;
     private String endTime;
     private String comment;
+    private String uploadStatus;
 }

@@ -40,6 +40,11 @@ public class TaskController {
     public ResponseMessage getStudentTaskList(@RequestParam BigInteger classCode, Pageable pageable){
         return ResponseMessage.ok(taskService.getStudentTask(classCode,pageable));
     }
+    @GetMapping("/getstudenttaskclass")
+    public ResponseMessage getStudentTaskClass(@RequestParam String stuNumber){
+        return ResponseMessage.ok(taskService.getStudentTaskClass(stuNumber));
+    }
+
     @PostMapping("/uploadfile")
     public ResponseMessage uploadFile(@RequestParam("file") MultipartFile file,String stuNumber,Integer taskId,String uploadTime){
         taskService.uploadFile(file,stuNumber,taskId,uploadTime);

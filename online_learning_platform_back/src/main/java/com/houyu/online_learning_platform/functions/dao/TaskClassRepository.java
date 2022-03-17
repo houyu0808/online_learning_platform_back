@@ -13,4 +13,5 @@ public interface TaskClassRepository extends JpaRepository<TaskClass,Integer> {
     List<TaskClass> findAllByBelongTaskId(Integer id);
     Page<TaskClass> findByBelongTaskId(Integer id, Pageable pageable);
     TaskClass findByBelongTaskIdAndStuNumber(Integer taskId,String stuNumber);
+    List<TaskClass> findAllByStuNumber(String stuNumber);
 }

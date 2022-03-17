@@ -112,6 +112,7 @@ public class TaskServiceImpl implements TaskService {
         TaskClass taskClass = taskClassRepository.findByBelongTaskIdAndStuNumber(taskId,stuNumber);
         taskClass.setFileUrl(uploadPath + "/studentFile/" + newName);
         taskClass.setUploadTime(uploadTime);
+        taskClass.setStatus("完成");
         try{
             file.transferTo(dest);
             taskClassRepository.save(taskClass);
@@ -153,6 +154,11 @@ public class TaskServiceImpl implements TaskService {
         }catch (Exception e){
             throw new Error(e);
         }
+    }
+
+    @Override
+    public List<TaskClass> getStudentTaskClass(String stuNumber) {
+        return taskClassRepository.findAllByStuNumber(stuNumber);
     }
 
 

@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.math.BigInteger;
+import java.util.List;
 
 
 @Service
@@ -21,4 +22,5 @@ public interface TaskService {
     Page<Task> getStudentTask(BigInteger classCode, Pageable pageable);
     void uploadFile(MultipartFile file,String stuNumber,Integer taskId,String uploadTime);
     void downloadFile(Integer id, HttpServletResponse response);
+    List<TaskClass> getStudentTaskClass(String stuNumber);
 }
