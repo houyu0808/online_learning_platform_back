@@ -1,5 +1,7 @@
 package com.houyu.online_learning_platform.functions.service.impl;
 
+import com.houyu.online_learning_platform.back_stage_manage.dao.VideoRepository;
+import com.houyu.online_learning_platform.back_stage_manage.entity.Video;
 import com.houyu.online_learning_platform.functions.dao.Comment2Repository;
 import com.houyu.online_learning_platform.functions.dao.CommentRepository;
 import com.houyu.online_learning_platform.functions.entity.Comment;
@@ -9,6 +11,8 @@ import com.houyu.online_learning_platform.functions.vo.Comment2VO;
 import com.houyu.online_learning_platform.functions.vo.CommentVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -23,6 +27,8 @@ public class CommentServiceImpl implements CommentService {
     private CommentRepository commentRepository;
     @Autowired
     private Comment2Repository comment2Repository;
+    @Autowired
+    private VideoRepository videoRepository;
 
     @Override
     public void addComments(CommentVO commentVO) {

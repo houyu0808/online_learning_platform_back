@@ -3,6 +3,7 @@ package com.houyu.online_learning_platform.functions.controller;
 import com.houyu.online_learning_platform.functions.service.CommonService;
 import com.houyu.online_learning_platform.utils.responseMessage.ResponseMessage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigInteger;
@@ -67,5 +68,10 @@ public class CommonController {
     @GetMapping("/gettodayrecommend")
     public ResponseMessage getTodayRecommend(){
         return ResponseMessage.ok(commonService.getTodayRecommend());
+    }
+
+    @GetMapping("/searchvideo")
+    public ResponseMessage searchVideo(@RequestParam String searchInfo, Pageable pageable){
+        return ResponseMessage.ok(commonService.searchVideo(searchInfo,pageable));
     }
 }

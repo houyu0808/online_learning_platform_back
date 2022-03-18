@@ -10,6 +10,8 @@ import com.houyu.online_learning_platform.back_stage_manage.entity.Teacher;
 import com.houyu.online_learning_platform.back_stage_manage.entity.Video;
 import com.houyu.online_learning_platform.functions.service.CommonService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -137,5 +139,9 @@ public class CommonServiceImpl implements CommonService {
     public List<Video> getTodayRecommend() {
         Date date = new Date();
         return videoRepository.getTodayRecommend(date);
+    }
+    @Override
+    public Page<Video> searchVideo(String searchInfo, Pageable pageable) {
+        return videoRepository.findAllByNameContainingOrderByClickTimesDesc(searchInfo,pageable);
     }
 }
