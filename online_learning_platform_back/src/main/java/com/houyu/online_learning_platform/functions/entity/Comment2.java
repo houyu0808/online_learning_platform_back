@@ -24,4 +24,5 @@ public class Comment2 {
     private Integer belongCommentId;
     private String commentUserCode;
     private String commentUsername;
+    private String commentHeadImg;
 }

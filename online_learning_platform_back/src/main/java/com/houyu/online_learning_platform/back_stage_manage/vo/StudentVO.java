@@ -23,4 +23,5 @@ public class StudentVO {
     private BigInteger affiliatedMajorCode;
     //所属学院
     private BigInteger affiliatedCollegeCode;
+    private String headImgUrl;
 }

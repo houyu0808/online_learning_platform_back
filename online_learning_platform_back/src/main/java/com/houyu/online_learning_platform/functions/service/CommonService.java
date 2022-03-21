@@ -6,6 +6,7 @@ import com.houyu.online_learning_platform.back_stage_manage.entity.Video;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigInteger;
 import java.util.List;
@@ -24,5 +25,6 @@ public interface CommonService {
     List<Video> getVideoList(String teacherCode);
     Teacher getTeacherInfo(String teacherCode);
     List<Video> getTodayRecommend();
-    Page<Video> searchVideo(String searchInfo, Pageable pageable);
+    Page<Video> searchVideo(String searchInfo,Pageable pageable);
+    void uploadHeadImg(MultipartFile file, String userNumber, String identify);
 }

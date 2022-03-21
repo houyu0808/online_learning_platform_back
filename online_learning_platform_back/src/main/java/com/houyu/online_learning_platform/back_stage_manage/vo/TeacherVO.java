@@ -21,4 +21,5 @@ public class TeacherVO {
     private BigInteger affiliatedCollegeCode;
     private Integer clickTimes;
     private String autograph;
+    private String headImgUrl;
 }

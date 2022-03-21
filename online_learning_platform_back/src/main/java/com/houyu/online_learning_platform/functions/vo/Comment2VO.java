@@ -15,4 +15,5 @@ public class Comment2VO {
     private Integer belongCommentId;
     private String commentUserCode;
     private String commentUsername;
+    private String commentHeadImg;
 }

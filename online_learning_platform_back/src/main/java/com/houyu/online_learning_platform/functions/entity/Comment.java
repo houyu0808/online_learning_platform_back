@@ -24,4 +24,5 @@ public class Comment {
     private Date createdTime;
     private String commentUserCode;
     private String commentUsername;
+    private String commentHeadImg;
 }

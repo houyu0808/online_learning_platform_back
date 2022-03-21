@@ -15,5 +15,6 @@ public class CommentVO {
     private Date createdTime;
     private String commentUserCode;
     private String commentUsername;
+    private String commentHeadImg;
     private List<Comment2VO> childCommentList;
 }

@@ -5,6 +5,7 @@ import com.houyu.online_learning_platform.utils.responseMessage.ResponseMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigInteger;
 
@@ -71,7 +72,12 @@ public class CommonController {
     }
 
     @GetMapping("/searchvideo")
-    public ResponseMessage searchVideo(@RequestParam String searchInfo, Pageable pageable){
+    public ResponseMessage searchVideo(@RequestParam String searchInfo,Pageable pageable){
         return ResponseMessage.ok(commonService.searchVideo(searchInfo,pageable));
+    }
+    @PostMapping("/uploadheadimg")
+    public ResponseMessage  uploadHeadImg(@RequestParam("file") MultipartFile file,String userNumber,String identify){
+        commonService.uploadHeadImg(file,userNumber,identify);
+        return ResponseMessage.ok(200,"上传成功");
     }
 }

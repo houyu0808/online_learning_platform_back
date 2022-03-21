@@ -1,6 +1,8 @@
 package com.houyu.online_learning_platform.functions.service.impl;
 
+import com.houyu.online_learning_platform.back_stage_manage.dao.StudentRepository;
 import com.houyu.online_learning_platform.back_stage_manage.dao.VideoRepository;
+import com.houyu.online_learning_platform.back_stage_manage.entity.Student;
 import com.houyu.online_learning_platform.back_stage_manage.entity.Video;
 import com.houyu.online_learning_platform.functions.dao.Comment2Repository;
 import com.houyu.online_learning_platform.functions.dao.CommentRepository;
@@ -28,12 +30,14 @@ public class CommentServiceImpl implements CommentService {
     @Autowired
     private Comment2Repository comment2Repository;
     @Autowired
-    private VideoRepository videoRepository;
+    private StudentRepository studentRepository;
 
     @Override
     public void addComments(CommentVO commentVO) {
         Comment comment = new Comment();
         BeanUtils.copyProperties(commentVO,comment);
+        Student student = studentRepository.findByStuNumber(commentVO.getCommentUserCode());
+        comment.setCommentHeadImg(student.getHeadImgUrl());
         comment.setFabulous(0);
         comment.setStep(0);
         comment.setCreatedTime(new Date());
@@ -44,6 +48,8 @@ public class CommentServiceImpl implements CommentService {
     public void addChildComments(Comment2VO comment2VO) {
         Comment2 comment2 = new Comment2();
         BeanUtils.copyProperties(comment2VO,comment2);
+        Student student = studentRepository.findByStuNumber(comment2VO.getCommentUserCode());
+        comment2.setCommentHeadImg(student.getHeadImgUrl());
         comment2.setFabulous(0);
         comment2.setStep(0);
         comment2.setCreatedTime(new Date());

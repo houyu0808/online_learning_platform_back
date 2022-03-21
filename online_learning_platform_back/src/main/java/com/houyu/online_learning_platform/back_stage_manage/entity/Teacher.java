@@ -34,4 +34,5 @@ public class Teacher {
     private String affiliatedCollegeName;
     private Integer clickTimes;
     private String autograph;
+    private String headImgUrl;
 }

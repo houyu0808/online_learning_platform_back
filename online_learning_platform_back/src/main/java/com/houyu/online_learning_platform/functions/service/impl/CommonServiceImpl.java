@@ -8,21 +8,29 @@ import com.houyu.online_learning_platform.back_stage_manage.entity.Course;
 import com.houyu.online_learning_platform.back_stage_manage.entity.Student;
 import com.houyu.online_learning_platform.back_stage_manage.entity.Teacher;
 import com.houyu.online_learning_platform.back_stage_manage.entity.Video;
+import com.houyu.online_learning_platform.functions.entity.TaskClass;
 import com.houyu.online_learning_platform.functions.service.CommonService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
+import java.io.File;
+import java.io.IOException;
 import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service
 @Transactional
 public class CommonServiceImpl implements CommonService {
+    @Value("${oss.local.upload-file-path}")
+    private String uploadFilePath;
+    @Value("${path.uploadPath}")
+    private String uploadPath;
+
     @Autowired
     private VideoRepository videoRepository;
     @Autowired
@@ -141,7 +149,33 @@ public class CommonServiceImpl implements CommonService {
         return videoRepository.getTodayRecommend(date);
     }
     @Override
-    public Page<Video> searchVideo(String searchInfo, Pageable pageable) {
+    public Page<Video> searchVideo(String searchInfo,Pageable pageable) {
         return videoRepository.findAllByNameContainingOrderByClickTimesDesc(searchInfo,pageable);
+    }
+
+    @Override
+    public void uploadHeadImg(MultipartFile file,String userNumber, String identify) {
+        String fileName = file.getOriginalFilename();
+        String newName = UUID.randomUUID().toString() + fileName.substring(fileName.lastIndexOf("."), fileName.length());
+        File dest = new File(uploadFilePath + "/headImage/" + newName);
+        if(identify.equals("学生")){
+            Student student = studentRepository.findByStuNumber(userNumber);
+            student.setHeadImgUrl(uploadPath + "/headImage/" + newName);
+            try{
+                file.transferTo(dest);
+                studentRepository.save(student);
+            }catch (IOException e){
+                throw new Error("文件存储出错！请联系管理员！");
+            }
+        }else{
+            Teacher teacher = teacherRepository.findByEmployeeNumber(userNumber);
+            teacher.setHeadImgUrl(uploadPath + "/headImage/" + newName);
+            try{
+                file.transferTo(dest);
+                teacherRepository.save(teacher);
+            }catch (IOException e){
+                throw new Error("文件存储出错！请联系管理员！");
+            }
+        }
     }
 }

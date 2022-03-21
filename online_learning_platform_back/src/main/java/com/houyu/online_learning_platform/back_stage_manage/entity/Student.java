@@ -40,4 +40,5 @@ public class Student {
     private BigInteger affiliatedCollegeCode;
     //所属学院名称
     private String affiliatedCollegeName;
+    private String headImgUrl;
 }
