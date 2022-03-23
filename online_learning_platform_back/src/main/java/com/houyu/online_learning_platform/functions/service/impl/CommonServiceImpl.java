@@ -154,7 +154,7 @@ public class CommonServiceImpl implements CommonService {
     }
 
     @Override
-    public void uploadHeadImg(MultipartFile file,String userNumber, String identify) {
+    public void uploadHeadImg(MultipartFile file,String userNumber,String identify) {
         String fileName = file.getOriginalFilename();
         String newName = UUID.randomUUID().toString() + fileName.substring(fileName.lastIndexOf("."), fileName.length());
         File dest = new File(uploadFilePath + "/headImage/" + newName);

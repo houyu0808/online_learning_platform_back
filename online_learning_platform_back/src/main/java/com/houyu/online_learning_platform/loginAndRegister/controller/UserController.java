@@ -3,6 +3,10 @@ package com.houyu.online_learning_platform.loginAndRegister.controller;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.houyu.online_learning_platform.back_stage_manage.dao.StudentRepository;
+import com.houyu.online_learning_platform.back_stage_manage.dao.TeacherRepository;
+import com.houyu.online_learning_platform.back_stage_manage.entity.Student;
+import com.houyu.online_learning_platform.back_stage_manage.entity.Teacher;
 import com.houyu.online_learning_platform.back_stage_manage.vo.StudentVO;
 import com.houyu.online_learning_platform.back_stage_manage.vo.TeacherVO;
 import com.houyu.online_learning_platform.loginAndRegister.dto.AdminDto;
@@ -15,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
+import java.util.Objects;
 
 @CrossOrigin
 @RestController
@@ -24,6 +29,10 @@ public class UserController {
     private AdminLoginService adminLoginService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private StudentRepository studentRepository;
+    @Autowired
+    private TeacherRepository teacherRepository;
 
     //管理员登录
     @PostMapping("/adminlogin")
@@ -43,7 +52,15 @@ public class UserController {
         String result = userService.userLogin(admindto.getUsername(), admindto.getPassword(), admindto.getIdentify());
         LoginDTO loginDTO = LoginStatusUtils.loginResponse(result);
         if(loginDTO.getCode() == 200 ){
-            return ResponseMessage.ok(loginDTO.getResult(),loginDTO.getMessage());
+            if(admindto.getIdentify().equals("学生")){
+                Student student = studentRepository.findByUsername(result);
+                student.setPassword("就不告诉你");
+                return ResponseMessage.ok(student,loginDTO.getMessage());
+            }else {
+                Teacher teacher = teacherRepository.findByUsername(result);
+                teacher.setPassword("就不告诉你");
+                return ResponseMessage.ok(teacher,loginDTO.getMessage());
+            }
         }else{
             return ResponseMessage.error(loginDTO.getCode(),loginDTO.getMessage());
         }

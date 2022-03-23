@@ -50,6 +50,7 @@ public class StudentServiceImpl implements StudentService {
             if(studentX == null){
                 studentVO.setStuNumber(student.getStuNumber());
                 studentVO.setPassword(student.getPassword());
+                studentVO.setHeadImgUrl(student.getHeadImgUrl());
                 BeanUtils.copyProperties(studentVO,student);
                 studentRepository.save(student);
                 return "更新成功";

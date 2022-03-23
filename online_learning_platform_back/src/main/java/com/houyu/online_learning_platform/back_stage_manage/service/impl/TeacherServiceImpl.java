@@ -42,6 +42,7 @@ public class TeacherServiceImpl implements TeacherService {
             if (teacher2 == null) {
                 teacherVO.setPassword(teacher.getPassword());
                 teacherVO.setPhoneNumber(teacher.getPhoneNumber());
+                teacherVO.setHeadImgUrl(teacher.getHeadImgUrl());
                 BeanUtils.copyProperties(teacherVO, teacher);
                 teacher.setAutograph(teacher2.getAutograph());
                 teacherRepository.save(teacher);
