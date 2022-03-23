@@ -77,7 +77,6 @@ public class CommonController {
     }
     @PostMapping("/uploadheadimg")
     public ResponseMessage  uploadHeadImg(@RequestParam("file") MultipartFile file,String userNumber,String identify){
-        commonService.uploadHeadImg(file,userNumber,identify);
-        return ResponseMessage.ok(200,"上传成功");
+        return ResponseMessage.ok(commonService.uploadHeadImg(file,userNumber,identify));
     }
 }

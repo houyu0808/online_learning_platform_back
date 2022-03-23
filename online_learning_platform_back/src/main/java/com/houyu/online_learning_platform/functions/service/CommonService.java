@@ -3,6 +3,7 @@ package com.houyu.online_learning_platform.functions.service;
 import com.houyu.online_learning_platform.back_stage_manage.entity.Student;
 import com.houyu.online_learning_platform.back_stage_manage.entity.Teacher;
 import com.houyu.online_learning_platform.back_stage_manage.entity.Video;
+import com.houyu.online_learning_platform.functions.dto.ContainDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -26,5 +27,5 @@ public interface CommonService {
     Teacher getTeacherInfo(String teacherCode);
     List<Video> getTodayRecommend();
     Page<Video> searchVideo(String searchInfo,Pageable pageable);
-    void uploadHeadImg(MultipartFile file, String userNumber, String identify);
+    ContainDto uploadHeadImg(MultipartFile file, String userNumber, String identify);
 }

@@ -8,6 +8,7 @@ import com.houyu.online_learning_platform.back_stage_manage.entity.Course;
 import com.houyu.online_learning_platform.back_stage_manage.entity.Student;
 import com.houyu.online_learning_platform.back_stage_manage.entity.Teacher;
 import com.houyu.online_learning_platform.back_stage_manage.entity.Video;
+import com.houyu.online_learning_platform.functions.dto.ContainDto;
 import com.houyu.online_learning_platform.functions.entity.TaskClass;
 import com.houyu.online_learning_platform.functions.service.CommonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -154,7 +155,7 @@ public class CommonServiceImpl implements CommonService {
     }
 
     @Override
-    public void uploadHeadImg(MultipartFile file,String userNumber,String identify) {
+    public ContainDto uploadHeadImg(MultipartFile file, String userNumber, String identify) {
         String fileName = file.getOriginalFilename();
         String newName = UUID.randomUUID().toString() + fileName.substring(fileName.lastIndexOf("."), fileName.length());
         File dest = new File(uploadFilePath + "/headImage/" + newName);
@@ -167,6 +168,9 @@ public class CommonServiceImpl implements CommonService {
             }catch (IOException e){
                 throw new Error("文件存储出错！请联系管理员！");
             }
+            ContainDto containDto = new ContainDto();
+            containDto.setStudent(student);
+            return containDto;
         }else{
             Teacher teacher = teacherRepository.findByEmployeeNumber(userNumber);
             teacher.setHeadImgUrl(uploadPath + "/headImage/" + newName);
@@ -176,6 +180,9 @@ public class CommonServiceImpl implements CommonService {
             }catch (IOException e){
                 throw new Error("文件存储出错！请联系管理员！");
             }
+            ContainDto containDto = new ContainDto();
+            containDto.setTeacher(teacher);
+            return containDto;
         }
     }
 }
