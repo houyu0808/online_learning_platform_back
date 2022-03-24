@@ -21,4 +21,5 @@ public class Forum {
     private Integer likes;
     private Integer viewTimes;
     private Integer imgJudge;
+    private String identify;
 }

@@ -11,4 +11,5 @@ public class ForumVO {
     private Integer likes;
     private Integer viewTimes;
     private Integer imgJudge;
+    private String identify;
 }
