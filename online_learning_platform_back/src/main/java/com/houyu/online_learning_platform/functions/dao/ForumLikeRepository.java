@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ForumLikeRepository extends JpaRepository<ForumLike,Integer> {
+    ForumLike findByBelongForumIdAndLikeUserNumber(Integer id,String userNumber);
 }

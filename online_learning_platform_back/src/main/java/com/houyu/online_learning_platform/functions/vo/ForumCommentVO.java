@@ -8,4 +8,7 @@ public class ForumCommentVO {
     private Integer belongForumId;
     private String comment;
     private String commentUserNumber;
+    private String identify;
+    private String username;
+    private String headImgUrl;
 }

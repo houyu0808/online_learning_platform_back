@@ -18,4 +18,5 @@ public class ForumComment {
     private Integer belongForumId;
     private String comment;
     private String commentUserNumber;
+    private String identify;
 }

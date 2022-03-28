@@ -21,7 +21,8 @@ public class WebConfig implements WebMvcConfigurer {
                 "/images/**",
                 "/videos/**",
                 "/common/**",
-                "/headImage/**"
+                "/headImage/**",
+                "/forum/**"
         };
         //注册一个登录拦截器
         registry.addInterceptor(new TokenUtils())
