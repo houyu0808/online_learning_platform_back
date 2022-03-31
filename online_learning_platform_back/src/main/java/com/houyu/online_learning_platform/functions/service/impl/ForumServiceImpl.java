@@ -64,10 +64,14 @@ public class ForumServiceImpl implements ForumService {
         forum.setForumContent(forumContent);
         forum.setPublishTime(publishTime);
         forum.setIdentify(identify);
-        if(files.length == 0){
+        try{
+            if(files[0].getOriginalFilename() == "") {
+                forum.setImgJudge(0);
+            }else{
+                forum.setImgJudge(1);
+            }
+        }catch (Exception e){
             forum.setImgJudge(0);
-        }else{
-            forum.setImgJudge(1);
         }
         forum.setVerifyString(UUID.randomUUID().toString());
         forum.setLikes(0);

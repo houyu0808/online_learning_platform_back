@@ -23,15 +23,15 @@ public class ForumController {
     public ResponseMessage getForumList(Pageable pageable){
         return ResponseMessage.ok(forumService.getForumList(pageable));
     }
-    @PostMapping("/addlike")
+    @GetMapping("/addlike")
     public ResponseMessage addLike(@RequestParam Integer forumId,@RequestParam String userNumber){
         forumService.addLike(forumId,userNumber);
-        return ResponseMessage.ok(200,"success");
+        return ResponseMessage.ok(200,"点赞成功");
     }
-    @PostMapping("/cancellike")
+    @GetMapping("/cancellike")
     public ResponseMessage cancelLike(@RequestParam Integer forumId,@RequestParam String userNumber){
         forumService.cancelLike(forumId,userNumber);
-        return ResponseMessage.ok(200,"success");
+        return ResponseMessage.ok(200,"取消点赞");
     }
 
     @PostMapping("/addcomment")
