@@ -12,8 +12,8 @@ import java.util.List;
 @Service
 public interface ForumService {
     void publishForum(MultipartFile[] files, String userNumber, String forumContent,String publishTime,String identify);
-    List<ForumDto> getForumList(Pageable pageable);
-    void addLike(Integer forumId,String userNumber);
+    List<ForumDto> getForumList(String userNumber,Pageable pageable);
+    void addLike(Integer forumId,String userNumber,String identify);
     void cancelLike(Integer forumId, String userNumber);
     void addComments(ForumCommentVO forumCommentVO);
 }

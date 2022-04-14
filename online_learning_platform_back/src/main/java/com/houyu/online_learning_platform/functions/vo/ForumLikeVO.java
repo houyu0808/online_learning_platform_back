@@ -7,4 +7,5 @@ public class ForumLikeVO {
     private Integer id;
     private Integer belongForumId;
     private String likeUserNumber;
+    private String identify;
 }

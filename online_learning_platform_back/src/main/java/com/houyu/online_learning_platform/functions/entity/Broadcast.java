@@ -7,15 +7,18 @@ import javax.persistence.*;
 
 @Getter
 @Setter
-@Table(name = "forum_like")
+@Table(name = "broadcast_list")
 @Entity
-public class ForumLike {
+public class Broadcast {
     @Id
     @GeneratedValue(
             strategy = GenerationType.IDENTITY
     )
     private Integer id;
-    private Integer belongForumId;
-    private String likeUserNumber;
-    private String identify;
+    private String broadcastTitle;
+    private String broadcastNumber;
+    private String liveUrl;
+    private String obsPushUrl;
+    private String obsKey;
+    private Integer status;
 }

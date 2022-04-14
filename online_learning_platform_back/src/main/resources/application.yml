@@ -4,9 +4,9 @@ spring:
 #  profiles:
 #    active: dev
   datasource:
+    url: jdbc:mysql://localhost:3306/learning_platform?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8&useSSL=false&allowPublicKeyRetrieval=true
     username: root
     password: 123456
-    url: jdbc:mysql://localhost:3306/learning_platform?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8&useSSL=false&allowPublicKeyRetrieval=true
     driver-class-name: com.mysql.cj.jdbc.Driver
   devtools:
     restart:
@@ -15,35 +15,6 @@ spring:
       exclude: WEB-INF/**
     freemarker:
       cache: false    #页面不加载缓存，修改即时生效
-  flyway:
-    # 是否启用flyway
-    enabled: false
-    # 编码格式，默认UTF-8
-    encoding: UTF-8
-    # 迁移sql脚本文件存放路径，默认db/migration
-    locations: classpath:database/flyway
-    # 迁移sql脚本文件名称的前缀，默认V
-    sql-migration-prefix: V
-    # 迁移sql脚本文件名称的分隔符，默认2个下划线__
-    sql-migration-separator: __
-    # 迁移sql脚本文件名称的后缀
-    sql-migration-suffixes: .sql
-    # 迁移时是否进行校验，默认true
-    validate-on-migrate: true
-    # 当迁移发现数据库非空且存在没有元数据的表时，自动执行基准迁移，新建schema_version表
-    baseline-on-migrate: true
-#  redis:
-#    host: 127.0.0.1
-#    port: 6379
-#    password: houyu07181
-#    jedis:
-#      pool:
-#        max-active: 8
-#        max-wait: -1
-#        max-idle: 500
-#        min-idle: 0
-#    lettuce:
-#      shutdown-timeout: 0
   servlet:
     multipart:
       enabled: true
@@ -70,7 +41,9 @@ oss:
   max_size: 52428800
   local:
     domain: 本地地址
+#    upload-file-path: /root/graduate_project
     upload-file-path: E:/graduation_Project
+
 # feign相关配置
 feign:
   # Feign org.springframework.data.domain.Page编码和解码

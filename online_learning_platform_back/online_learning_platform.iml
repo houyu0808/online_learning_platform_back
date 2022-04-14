@@ -121,7 +121,6 @@
     <orderEntry type="library" name="Maven: org.springframework.data:spring-data-commons:2.5.4" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-orm:5.3.9" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-aspects:5.3.9" level="project" />
-    <orderEntry type="library" name="Maven: org.flywaydb:flyway-core:7.7.3" level="project" />
     <orderEntry type="library" name="Maven: com.auth0:java-jwt:3.4.0" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.12.4" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.12.4" level="project" />

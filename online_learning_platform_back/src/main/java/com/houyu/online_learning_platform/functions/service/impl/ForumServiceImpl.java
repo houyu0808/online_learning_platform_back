@@ -97,7 +97,7 @@ public class ForumServiceImpl implements ForumService {
     }
 
     @Override
-    public List<ForumDto> getForumList(Pageable pageable) {
+    public List<ForumDto> getForumList(String userNumber,Pageable pageable) {
         Page<Forum> forumPage = forumRepository.findAllOrderBy(pageable);
         List<Forum> forumList = forumPage.getContent();
         List<ForumDto> forumDtoList = new ArrayList<>();
@@ -112,12 +112,8 @@ public class ForumServiceImpl implements ForumService {
                 forumDto.setUsername(teacher.getUsername());
                 forumDto.setHeadImg(teacher.getHeadImgUrl());
             }
-            ForumLike forumLike = forumLikeRepository.findByBelongForumIdAndLikeUserNumber(forum.getId(),forum.getPublisherNumber());
-            if(ObjectUtils.isEmpty(forumLike)){
-                forumDto.setLike(false);
-            }else{
-                forumDto.setLike(true);
-            }
+            ForumLike forumLike = forumLikeRepository.findByBelongForumIdAndLikeUserNumber(forum.getId(),userNumber);
+            forumDto.setLike(!ObjectUtils.isEmpty(forumLike));
             ForumVO forumVO = new ForumVO();
             BeanUtils.copyProperties(forum,forumVO);
             forumDto.setForumVO(forumVO);
@@ -152,13 +148,14 @@ public class ForumServiceImpl implements ForumService {
     }
 
     @Override
-    public void addLike(Integer forumId, String userNumber) {
+    public void addLike(Integer forumId, String userNumber,String identify) {
         Forum forum = forumRepository.findById(forumId).get();
         forum.setLikes(forum.getLikes() + 1);
         forumRepository.save(forum);
         ForumLike forumLike = new ForumLike();
         forumLike.setBelongForumId(forumId);
         forumLike.setLikeUserNumber(userNumber);
+        forumLike.setIdentify(identify);
         forumLikeRepository.save(forumLike);
     }
     @Override

@@ -20,12 +20,12 @@ public class ForumController {
         return ResponseMessage.ok(200,"发布成功!");
     }
     @GetMapping("/getforumlist")
-    public ResponseMessage getForumList(Pageable pageable){
-        return ResponseMessage.ok(forumService.getForumList(pageable));
+    public ResponseMessage getForumList(String userNumber,Pageable pageable){
+        return ResponseMessage.ok(forumService.getForumList(userNumber,pageable));
     }
     @GetMapping("/addlike")
-    public ResponseMessage addLike(@RequestParam Integer forumId,@RequestParam String userNumber){
-        forumService.addLike(forumId,userNumber);
+    public ResponseMessage addLike(@RequestParam Integer forumId,@RequestParam String userNumber,@RequestParam String identify){
+        forumService.addLike(forumId,userNumber,identify);
         return ResponseMessage.ok(200,"点赞成功");
     }
     @GetMapping("/cancellike")
