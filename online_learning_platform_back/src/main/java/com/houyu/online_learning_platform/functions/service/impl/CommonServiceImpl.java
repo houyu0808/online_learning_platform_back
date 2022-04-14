@@ -147,7 +147,14 @@ public class CommonServiceImpl implements CommonService {
     @Override
     public List<Video> getTodayRecommend() {
         Date date = new Date();
-        return videoRepository.getTodayRecommend(date);
+        List<Video> videoList = videoRepository.getTodayRecommend();
+        List<Video> videos = new ArrayList<>();
+        for (Video video:videoList){
+            if(video.getCreatedTime().getYear() == date.getYear() &&video.getCreatedTime().getMonth() == date.getMonth() &&video.getCreatedTime().getDate() == date.getDate()){
+                videos.add(video);
+            }
+        }
+        return videos;
     }
     @Override
     public Page<Video> searchVideo(String searchInfo,Pageable pageable) {

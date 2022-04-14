@@ -32,8 +32,8 @@ public interface VideoRepository extends JpaRepository<Video,Integer> {
      List<Video> findAllByBelongTeacherCode(String teacherCode);
      List<Video> findAllByBelongTeacherCodeOrderByClickTimes(String teacherCode);
 
-     @Query(nativeQuery = true,value = "select * from video_info where created_time = ?1 order by click_times DESC limit 5")
-     List<Video> getTodayRecommend(Date time);
+     @Query(nativeQuery = true,value = "select * from video_info  order by click_times DESC")
+     List<Video> getTodayRecommend();
 
      @Query(nativeQuery = true,value = "select * from video_info where name like CONCAT('%', ?1 ,'%') order by ?#{#pageable}")
      Page<Video> findAllByNameContainingOrderByClickTimesDesc(String searchInfo,Pageable pageable);

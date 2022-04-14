@@ -1,5 +1,6 @@
 package com.houyu.online_learning_platform.functions.controller;
 
+import com.houyu.online_learning_platform.back_stage_manage.vo.VideoVO;
 import com.houyu.online_learning_platform.functions.service.CommonService;
 import com.houyu.online_learning_platform.utils.responseMessage.ResponseMessage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,5 +79,9 @@ public class CommonController {
     @PostMapping("/uploadheadimg")
     public ResponseMessage  uploadHeadImg(@RequestParam("file") MultipartFile file,String userNumber,String identify){
         return ResponseMessage.ok(commonService.uploadHeadImg(file,userNumber,identify));
+    }
+    @GetMapping("/uploadVideo")
+    public ResponseMessage uploadVideo(@RequestParam("file1") MultipartFile file1, @RequestParam("file2")MultipartFile file2, VideoVO videoVO){
+        return ResponseMessage.ok();
     }
 }
